@@ -5,10 +5,6 @@
 
 
 
-
-
-
-
 # ___UKB Table variant LOF not HC cols -------------------------------------------
 
 # annotate cols with LOF variants without HC, age, binaries, survival data
@@ -25,23 +21,23 @@ library(survival)
 
 
 # main df
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260220_Summary_age_delays_diag_CH_PRS_REVEL_LOF_alphaMS.txt")
+df <- fread("file")
 
 # Import new df with LOF count column
-new_df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/001_RareVariants_allscores_bylist_20260414.txt") %>% 
+new_df <- fread("file")z %>% 
   select(`Participant.ID`, WES_500k_LoF_MAF01__Hauck_ITPnHAI, WES_500k_LoF_MAF1__Hauck_ITPnHAI)
 
 # Import PRS table to get indivs ages
-prs_table <- read_xlsx("/home/stn/Documents/GitHub/BIN6007_Stage/project_icon_invitae/filtered_data/PRS/PRS_SLE_500k.xlsx") %>% 
+prs_table <- read_xlsx("file") %>% 
   select(`Participant.ID`, `Age.at.recruitment` )
 
 
 
-df_survival <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/004_20240421_SurvivalAnalysis_Censoring_final.txt", select = c("participant_id", "death_date", "death_censor_date", "hesin_last_date")) %>% 
+df_survival <- fread("file", select = c("participant_id", "death_date", "death_censor_date", "hesin_last_date")) %>% 
   rename(`Participant.ID` = participant_id)
 
 
-df_date_blood_drawing <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/4_500k_bloodcount.txt", select = c("Participant.ID", "Time.blood.sample.collected...Instance.0...Array.0"))
+df_date_blood_drawing <- fread("file", select = c("Participant.ID", "Time.blood.sample.collected...Instance.0...Array.0"))
 
 
 
@@ -186,7 +182,7 @@ output <- df_span_age_end_follow_up_x_age_inclusion
 
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt" ,
+            file = "file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -220,49 +216,49 @@ for (pkg in required_packages) {
 
 
 ### Import files
-df_main <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/data/cohort/DateEndFollow_reliable.tsv") %>% 
+df_main <- fread("file") %>% 
   rename(date_end_follow_up = followup_end_conservative,
          age_end_follow_up = age_at_followup)
 
-df_sequenced_indivs <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/results/1_diagnostics/autoimmune_diseases_CDRv8/wgs_samples.tsv")
+df_sequenced_indivs <- fread("file")
 
-df_ITP_693_indivs <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/results/1_diagnostics/autoimmune_diseases_CDRv8/TPI_693_only.tsv")
+df_ITP_693_indivs <- fread("file")
 
-df_AIHA_indivs <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/results/1_diagnostics/autoimmune_diseases_CDRv8/AHAI_only.tsv")
+df_AIHA_indivs <- fread("file")
 
-df_general_info <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/data/cohort/general_info_allparticipants_CDRv8.tsv", 
+df_general_info <- fread("file", 
                          select = c("person_id","sex_genetic", "year_of_birth"))
 
-df_sle_indivs <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/results/1_diagnostics/autoimmune_diseases_CDRv8/summary_by_diag/SLE_participant.txt")
+df_sle_indivs <- fread("file")
 
-df_llc_indivs <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/results/1_diagnostics/autoimmune_diseases_CDRv8/summary_by_diag/LLC_participant.txt")
+df_llc_indivs <- fread("file")
 
-df_lymphome_indivs <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/results/1_diagnostics/autoimmune_diseases_CDRv8/summary_by_diag/LYMPHOME_participant.txt")
+df_lymphome_indivs <- fread("file")
 
-df_other_leuk_indivs <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/results/1_diagnostics/autoimmune_diseases_CDRv8/summary_by_diag/Other_LEUK_participant.txt")
+df_other_leuk_indivs <- fread("file")
 
-df_LoF_MAF01__Hauck_ITPnHAI <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/002_AoU_LoF_MAF01__Hauck_ITPnHAI.tsv", 
+df_LoF_MAF01__Hauck_ITPnHAI <- fread("/file", 
                                      select = c("s", "AoU_LoF_MAF01__Hauck_ITPnHAI")) %>% 
   distinct(s, .keep_all = T)
 
-df_LoF_MAF1__Hauck_ITPnHAI <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/005_AoU_LoF_MAF1__Hauck_ITPnHAI.tsv", 
+df_LoF_MAF1__Hauck_ITPnHAI <- fread("/file", 
                                     select = c("s", "AoU_LoF_MAF1__Hauck_ITPnHAI")) %>% 
   distinct(s, .keep_all = T)
 
-df_CHIP <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/003_AoU_CHIP.tsv")
+df_CHIP <- fread("file")
 
-df_PGS_196 <- fread("/home/rstudio/workspace/workspace-bucket/data/from_workspace_PRS_calculation/PGS000196_scores.csv") %>% 
+df_PGS_196 <- fread("file") %>% 
   select(-N_variants) %>% 
   rename(PGS000196 = sum_weights)
 
-df_PGS_4917 <- fread("/home/rstudio/workspace/workspace-bucket/data/from_workspace_PRS_calculation/PGS004917_scores.csv") %>% 
+df_PGS_4917 <- fread("file") %>% 
   select(-N_variants) %>% 
   rename(PGS004917 = sum_weights)
 
-df_all_covariables <- fread("/home/rstudio/workspace/workspace-bucket/data/cohort/20260618_all_covariables.tsv") %>% 
+df_all_covariables <- fread("file") %>% 
   select(person_id, PC1, PC2, PC3, PC4, PC5, PC6, PC7, PC8, PC9, PC10, biosample_collection_age)
 
-df_first_condition <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/data/cohort/archive/lastcondition_allparticipants.tsv") %>% 
+df_first_condition <- fread("file") %>% 
   select(person_id, first_condition_date)
 
 
@@ -474,7 +470,7 @@ names(output)
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -513,13 +509,13 @@ df_final <- data.table()
 
 for (chr in 1:22){
   
-  df_temp <- paste0("/home/rstudio/workspace/workspace-bucket/stennio/lof_genotypes/lof_carriers_chr", chr, ".tsv") %>% fread()
+  df_temp <- paste0("/file", chr, ".tsv") %>% fread()
   df_temp$chr = chr
   df_final <- rbind(df_final, df_temp)
   
 }
 
-chrx <- fread("/home/rstudio/workspace/workspace-bucket/stennio/lof_genotypes/lof_carriers_chrX.tsv")
+chrx <- fread("/file")
 chrx$chr = "x"
 df_final <- rbind(df_final, chrx)
 
@@ -532,7 +528,7 @@ output <- df_final
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/000_data/001_all_chr_lof_carriers.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -545,10 +541,10 @@ print('final table written')
 
 
 ### Filter genes in ITP or AIHA
-df_main <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/001_all_chr_lof_carriers.tsv") %>% 
+df_main <- fread("/file") %>% 
   mutate(Gene = gene_symbol)
 
-hauck_list <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/IEI_Hauck_2024_FASLG.csv")
+hauck_list <- fread("/file")
 
 
 
@@ -624,7 +620,7 @@ df_genes_in_CAI <- df_genes_in_AIHA %>%
 # # Write output
 # print('writing final table')
 # write.table(output,
-#             file = "/home/rstudio/workspace/workspace-bucket/stennio/000_data/004_indiv_13_varfiants.tsv" ,
+#             file = "/file" ,
 #             sep = "\t", row.names = F, col.names = T , quote = F)
 # 
 # print('final table written')
@@ -663,7 +659,7 @@ df_keys <- df_chrX %>%
 ###  Prepare AF table for merge
 
 # AF
-df_lof_AF <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/results/2_variants/20260506_lof_variants_517genes_autoimmune.tsv")
+df_lof_AF <- fread("file")
 # The df has duplicated variant lines because the multiple vals in the gene col was splitted to unique values in the col gene_symbol
 
 
@@ -734,7 +730,7 @@ output <- df_lof_per_indiv
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/000_data/002_AoU_LoF_MAF01__Hauck_ITPnHAI.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -749,10 +745,10 @@ print('final table written')
 
 
 ### Filter genes in ITP or AIHA
-df_main <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/001_all_chr_lof_carriers.tsv") %>% 
+df_main <- fread("file") %>% 
   mutate(Gene = gene_symbol)
 
-hauck_list <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/IEI_Hauck_2024_FASLG.csv")
+hauck_list <- fread("file")
 
 
 
@@ -828,7 +824,7 @@ df_genes_in_CAI <- df_genes_in_AIHA %>%
 # # Write output
 # print('writing final table')
 # write.table(output,
-#             file = "/home/rstudio/workspace/workspace-bucket/stennio/000_data/004_indiv_13_varfiants.tsv" ,
+#             file = "/file" ,
 #             sep = "\t", row.names = F, col.names = T , quote = F)
 # 
 # print('final table written')
@@ -867,7 +863,7 @@ df_keys <- df_chrX %>%
 ###  Prepare AF table for merge
 
 # AF
-df_lof_AF <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/results/2_variants/20260506_lof_variants_517genes_autoimmune.tsv")
+df_lof_AF <- fread("file")
 # The df has duplicated variant lines because the multiple vals in the gene col was splitted to unique values in the col gene_symbol
 
 
@@ -933,7 +929,7 @@ output <- df_lof_per_indiv
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/000_data/005_AoU_LoF_MAF1__Hauck_ITPnHAI.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -945,17 +941,17 @@ print('final table written')
 
 # ____HC variants -------------------------------------------------------------
 
-#all_hc_variants <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/data/CH/all_CHIP_calls_02082023.txt")
+#all_hc_variants <- fread("/file")
 
-df_chip_per_person <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/data/CH/CHIP_calls_per_person_02082023.txt")
+df_chip_per_person <- fread("/file")
 
 
-df_all_covariables <- fread("/home/rstudio/workspace/workspace-bucket/data/cohort/20260618_all_covariables.tsv") %>% 
+df_all_covariables <- fread("/file") %>% 
   select(person_id, biosample_collection_age) %>% 
   distinct(person_id, .keep_all = T)
 
 
-# df_first_condition <- fread("/home/rstudio/workspace/workspace-bucket/Project_Rare_Variants/data/cohort/archive/lastcondition_allparticipants.tsv") %>% 
+# df_first_condition <- fread("file") %>% 
 #   select(person_id, first_condition_date)
 # We can't use this because we don't know if the indivs had the clone at the time of first condition
 
@@ -987,7 +983,7 @@ output <- df_age_blood_draw
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/000_data/003_AoU_CHIP.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -1000,12 +996,6 @@ print('final table written')
 
 # ___001 VARIANTS RARE ---------------------------------------------------
 
-
-# ____001 CAI - variants dans genes associees aux CAI (liste Hauck ITP + AIHA ensemble mais sans SLE) --------
-# maf <0.1 et maf <1%
-# LOF seul, Revel 0.9 et 0.5 seul, LOF + Revel 0.9
-# Faire en régression logistique (ajusté sur sexe, âge à la dernière visite/décès et 10 PC (pas besoin de faire de chi2/Fisher)
-# Faire également le test en ne considerant pas les variants TET2 (donc la meme liste mais sans variant TET2)
 
 
 # _____001a MAF < 0.1% -------------------------------------------------------------------
@@ -1021,7 +1011,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+df <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -1153,7 +1143,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+df <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -1286,7 +1276,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+df <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -1427,7 +1417,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -1585,7 +1575,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+df <- fread("file") %>% 
   select(
     # General data
     person_id,
@@ -1724,7 +1714,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -1857,7 +1847,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -1990,7 +1980,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -2131,7 +2121,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -2279,7 +2269,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -2410,7 +2400,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -2541,7 +2531,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -2678,7 +2668,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -2832,7 +2822,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+df <- fread("file") %>% 
   select(
     # General data
     person_id,
@@ -2978,7 +2968,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -3113,7 +3103,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -3246,7 +3236,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -3378,7 +3368,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -3529,7 +3519,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -3663,7 +3653,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -3798,7 +3788,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -3930,7 +3920,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -4063,7 +4053,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -4219,7 +4209,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -4365,7 +4355,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -4499,7 +4489,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -4635,7 +4625,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -4769,7 +4759,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -4904,11 +4894,6 @@ print(results, digits = 3)
 
 # ____003 âge (moyenne, SD et t-test) au diagnostic de la première CAI pour les patients avec LOF et sans LOF  -----------------------------------------------------------------
 # 
-# A faire @Stennio Faria (liste Hauck ITP+AIHA maf 0.1%): 
-# âge (moyenne, SD et t-test) au diagnostic de la première CAI pour les patients avec LOF et sans LOF 
-# 
-# Nombre de patients avec 1, 2 et 3 variants
-
 
 # _____003a CAI and LoF mean diag age comparsion --------------------------------------------------
 
@@ -4927,7 +4912,7 @@ library(survival)
 
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -5081,7 +5066,7 @@ library(survival)
 
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -5148,7 +5133,7 @@ df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/tr
   )
 
 
-df_bygenes <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/002_RareVariants_allscores_bygenes_20260414_no_HC.txt", select = c("Participant.ID", "Gene", "WES_500k_LoF_MAF01"))
+df_bygenes <- fread("file", select = c("Participant.ID", "Gene", "WES_500k_LoF_MAF01"))
 
 
 # Subset CAI
@@ -5205,7 +5190,7 @@ library(survival)
 
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -5344,7 +5329,7 @@ library(survival)
 
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -5488,7 +5473,7 @@ library(lubridate)
 library(survival)
 
 
-main_table <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+main_table <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -5555,9 +5540,9 @@ main_table <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/n
   )
 
 
-df_bygenes <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/002_RareVariants_allscores_bygenes_20260414_no_HC.txt", select = c("Participant.ID", "Gene", "WES_500k_Miss5_MAF01"))
+df_bygenes <- fread("/file", select = c("Participant.ID", "Gene", "WES_500k_Miss5_MAF01"))
 
-hauck_list <- read_xlsx("/home/stn/Documents/GitHub/Doc/analysis/genes_lists/IEI_Hauck_2024_FASLG.xlsx")
+hauck_list <- read_xlsx("/file")
 
 
 
@@ -5721,7 +5706,7 @@ library(lubridate)
 library(survival)
 
 
-main_table <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+main_table <- fread("/file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -5788,9 +5773,9 @@ main_table <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/n
   )
 
 
-df_bygenes <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/002_RareVariants_allscores_bygenes_20260414_no_HC.txt", select = c("Participant.ID", "Gene", "WES_500k_Miss5_MAF01"))
+df_bygenes <- fread("file", select = c("Participant.ID", "Gene", "WES_500k_Miss5_MAF01"))
 
-hauck_list <- read_xlsx("/home/stn/Documents/GitHub/Doc/analysis/genes_lists/IEI_Hauck_2024_FASLG.xlsx")
+hauck_list <- read_xlsx("file")
 
 
 
@@ -5959,7 +5944,7 @@ library(lubridate)
 library(survival)
 
 
-main_table <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+main_table <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -6026,7 +6011,7 @@ main_table <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/n
   )
 
 
-df_bygenes <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/002_RareVariants_allscores_bygenes_20260414_no_HC.txt", select = c("Participant.ID", "Gene", "WES_500k_Miss5_MAF01"))
+df_bygenes <- fread("file"), select = c("Participant.ID", "Gene", "WES_500k_Miss5_MAF01"))
 
 hauck_list <- read_xlsx("/home/stn/Documents/GitHub/Doc/analysis/genes_lists/IEI_Hauck_2024_FASLG.xlsx")
 
@@ -6202,7 +6187,7 @@ library(readxl)
 library(broom)
 
 
-df_main <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+df_main <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -6269,7 +6254,7 @@ df_main <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narv
   )
 
 
-df_alphaMS <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260220_Summary_age_delays_diag_CH_PRS_REVEL_LOF_alphaMS.txt", 
+df_alphaMS <- fread("file"), 
                     select = c("Participant.ID","list_ITPnHAI_maf_MAF0.1_alphaMS.likely.pathogenic_count")
 )
 
@@ -6348,7 +6333,7 @@ library(readxl)
 library(broom)
 
 
-df_main <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+df_main <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -6415,7 +6400,7 @@ df_main <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narv
   )
 
 
-df_alphaMS <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260220_Summary_age_delays_diag_CH_PRS_REVEL_LOF_alphaMS.txt", 
+df_alphaMS <- fread("file"), 
                     select = c("Participant.ID","list_ITPnHAI_maf_MAF0.1_alphaMS.likely.pathogenic_count")
 )
 
@@ -6492,7 +6477,7 @@ library(readxl)
 library(broom)
 
 
-df_main <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+df_main <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -6559,7 +6544,7 @@ df_main <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narv
   )
 
 
-df_alphaMS <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260220_Summary_age_delays_diag_CH_PRS_REVEL_LOF_alphaMS.txt", 
+df_alphaMS <- fread("file"), 
                     select = c("Participant.ID","list_ITPnHAI_maf_MAF0.1_alphaMS.likely.pathogenic_count")
 )
 
@@ -6661,7 +6646,7 @@ library(OptSurvCutR)
 
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260611_AoU_master_tab_ITP_AIHA_FUP_age_date.tsv") 
+df <- fread("file")
 
 
 
@@ -6804,7 +6789,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -7011,7 +6996,7 @@ df_subset$LoF_binary <- ifelse(df_subset$WES_500k_LoF_MAF01__Hauck_ITPnHAI > 0, 
 # 
 # 
 # ### Save the plot as PNG
-# setwd("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/009_first_article/001_cox_curves")
+# setwd("fread("file")
 # png("cumulative_incidence_curve_km.png", width = 8, height = 6, units = "in", res = 300)
 # 
 # # Re-run the plotting code to save
@@ -7053,7 +7038,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/001_Fig_1p4_incidence_cumulative_naissance_LOF_CAI.tsv" ,
+            file = "file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -7077,375 +7062,13 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/001_incidence_cumulative_naissance_LOF_CAI_for_prism.tsv" ,
+            file = "file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-# _______ (legacy) ITP -----------------------------------------------------------------
-# Legacy : results not used. Only CAI results was used
-
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-library(tidyplots)
-library(lubridate)
-library(survival)
-library(survminer)
-library(ggsurvfit)
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.
-  )
-
-
-
-
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP == 1, 
-                                     TPI_lower_age - age_inclusion,
-                                     age_end_follow_up - age_inclusion))
-
-
-# Convert ages from days to years BEFORE creating variables
-df_subset_years <- df_follow_up_duration %>%
-  mutate(
-    # Convert ages from days to years
-    TPI_lower_age_years = TPI_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    age_inclusion_years = age_inclusion / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP == 1,
-                                      TPI_lower_age_years - age_inclusion_years,
-                                      age_end_follow_up_years - age_inclusion_years)
-  )
-
-
-
-# Subset if needed
-df_subset <- df_subset_years %>% 
-  filter(follow_up_duration > 0)
-nrow(df_subset)
-
-
-
-
-### Cox model
-
-# Multivariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP) ~ WES_500k_LoF_MAF01__Hauck_ITPnHAI +
-    Age.at.recruitment + omop_gender_concept_id + 
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-
-### Univariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP) ~ WES_500k_LoF_MAF01__Hauck_ITPnHAI,
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-### Puis tracer incidence cumulative AIC en fonction de LOF temps 0= naissance. evenement: diag AIC
-# First, create binary variable (carrier vs non-carrier)
-df_subset$LoF_binary <- ifelse(df_subset$WES_500k_LoF_MAF01__Hauck_ITPnHAI > 0, 1, 0)
-
-
-
-plot(survfit(Surv(time = TPI_lower_age_years, time2 = age_end_follow_up_years, event = binary_ITP) ~ LoF_binary, data = df_subset))
-
-
-
-
-# Kaplan-Meier curve (equivalent to Cox model with binary variable)
-fit_km <- survfit(Surv(follow_up_duration_years, binary_ITP) ~ LoF_binary,
-                  data = df_subset)
-
-fit_km
-
-
-
-
-
-### Graph formatting
-# Plot without X axis initially
-plot(fit_km, 
-     fun = "event",                # Cumulative incidence (1 - survival)
-     col = c("blue", "red"),
-     lwd = 2,
-     xlab = "Age (years)",
-     ylab = "Cumulative incidence",
-     main = "Cumulative incidence curve (Kaplan-Meier). LoF variants",
-     xaxt = "n")                   # Suppresses automatic X axis
-
-# Add manual X axis with 5-year intervals
-max_age <- max(df_subset$follow_up_duration_years, na.rm = TRUE)
-breaks_x <- seq(0, ceiling(max_age/5)*5, by = 5)
-
-axis(side = 1, at = breaks_x, labels = breaks_x)
-
-# Add vertical grid at the breaks
-abline(v = breaks_x, col = "lightgray", lty = 2)
-
-# Add legend
-legend("bottomright",
-       legend = c("Non-carriers", "Carriers"),
-       col = c("blue", "red"),
-       lwd = 2)
-###
-
-
-
-
-
-
-
-
-
-# _______ (legacy) AIHA -----------------------------------------------------------------
-# Legacy : results not used. Only CAI results was used
-
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-library(tidyplots)
-library(lubridate)
-library(survival)
-library(survminer)
-library(ggsurvfit)
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.
-  )
-
-
-
-
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df %>% 
-  mutate(follow_up_duration = ifelse(binary_AIHA == 1, 
-                                     AIHA_lower_age - age_inclusion,
-                                     age_end_follow_up - age_inclusion))
-
-
-# Convert ages from days to years BEFORE creating variables
-df_subset_years <- df_follow_up_duration %>%
-  mutate(
-    # Convert ages from days to years
-    AIHA_lower_age_years = AIHA_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    age_inclusion_years = age_inclusion / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_AIHA == 1,
-                                      AIHA_lower_age_years - age_inclusion_years,
-                                      age_end_follow_up_years - age_inclusion_years)
-  )
-
-
-
-# Subset if needed
-df_subset <- df_subset_years %>% 
-  filter(follow_up_duration > 0)
-nrow(df_subset)
-
-
-
-
-### Cox model
-
-# Multivariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_AIHA) ~ WES_500k_LoF_MAF01__Hauck_ITPnHAI +
-    Age.at.recruitment + omop_gender_concept_id + 
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-
-### Univariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_AIHA) ~ WES_500k_LoF_MAF01__Hauck_ITPnHAI,
-  data=df_subset)
-
-
-summary(cox_model)
 
 
 
@@ -7476,14 +7099,9 @@ summary(cox_model)
 #___2) PRS SLE to predict risk of CAI ----------------------------------------
 # Supplemental table 4
 
-# Faire avec AIHA et ITP séparé 
-
 
 
 # ______2.1 CAI---------------------------------------------------------------------
-# mkdir -p $UKBDATA/027_first_article_OptSurvCutR/001_section_2
-# cd $UKBDATA/027_first_article_OptSurvCutR/001_section_2
-
 
 # Fig 2B
 
@@ -7504,7 +7122,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -7710,7 +7328,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/articles/first_year_phd_pubs/002_first_article/para_julie/Fig2B_cumulative_incidence_SLE_PGS_CAI.tsv" ,
+            file = "file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -7907,7 +7525,7 @@ library(OptSurvCutR)
 
 
 
-df <- fread("/lustre09/project/6097258/stnfaria/ukb_rare_variants/000_whole_cohort/data/027_first_article_OptSurvCutR/20260514_summary_age_delays_score_LOF_SLE_LM_CH.tsv")  %>% 
+df <- fread("file") %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -8106,7 +7724,7 @@ library(OptSurvCutR)
 ### Defining cutpoint
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -8255,7 +7873,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -8404,7 +8022,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/003_first_article_replication/002_data_for_julie_fig2_code_2p1p2p3/001_Fig2A_AoU_CAI_PGS000196.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -8436,7 +8054,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -8599,7 +8217,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -8776,7 +8394,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/002_incidence_cumulative_naissance_SLE_CAI_for_prism.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -8835,7 +8453,7 @@ library(OptSurvCutR)
 ### Defining cutpoint
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -8984,7 +8602,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -9134,7 +8752,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/003_first_article_replication/002_data_for_julie_fig2_code_2p1p2p3/002_Fig2A_AoU_CAI_PGS004917.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -9169,7 +8787,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -9331,7 +8949,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -9488,7 +9106,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -9618,7 +9236,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -9747,7 +9365,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -9908,7 +9526,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -10069,7 +9687,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -10341,7 +9959,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -10487,7 +10105,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -10634,7 +10252,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/003_first_article_replication/002_data_for_julie_fig2_code_2p1p2p3/005_Fig2A_AoU_AIHA_PGS000196.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -10674,7 +10292,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -10823,7 +10441,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -10973,7 +10591,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/003_first_article_replication/002_data_for_julie_fig2_code_2p1p2p3/006_Fig2A_AoU_AIHA_PGS004917.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -11014,7 +10632,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -11144,7 +10762,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -11273,7 +10891,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -11431,7 +11049,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -11588,7 +11206,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -11860,7 +11478,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -12005,7 +11623,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -12152,7 +11770,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/003_first_article_replication/002_data_for_julie_fig2_code_2p1p2p3/003_Fig2A_AoU_ITP_PGS000196.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -12193,7 +11811,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -12339,7 +11957,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -12489,7 +12107,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/003_first_article_replication/002_data_for_julie_fig2_code_2p1p2p3/004_Fig2A_AoU_ITP_PGS004917.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -12532,7 +12150,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -12662,7 +12280,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -12791,7 +12409,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -12948,7 +12566,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -13084,7 +12702,6 @@ print(results, digits = 3)
 
 
 # ______2.4 Assoc PRS age au diag -------------------------------------------
-# 3.  @Stennio Faria: Parmi les patients avec AIC, association entre PRS SLE et âge au diag
 
 ### CAI
 
@@ -13102,7 +12719,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -13227,10 +12844,6 @@ print(results, digits = 3)
 
 
 # ______2.5 PRS x age au diag -------------------------------------------
-# Analysis: subset CAI binary = 1,
-# exlcure indivs with lymphoiod malignancy avant CAI AND 
-# exclure indivs qui ont Lof AND
-# exclure ceux avec CH, refaire age x PRS
 
 
 
@@ -13250,7 +12863,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -13399,561 +13012,6 @@ print(results, digits = 3)
 
 
 
-# ______ (other paper) 2.6 risk of CAI in SLE patients -------------------------------------
-
-
-#### To put in a separate paper
-
-
-
-# subset SLE, binary_CAI
-
-
-# Logistic regression
-
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.
-  )
-
-
-
-
-
-# Subset if needed
-df_subset <- df %>% 
-  filter(!is.na(SLE))
-nrow(df_subset)
-
-
-summary(glm(
-  as.factor(binary_ITP_or_AIHA_indivs) ~  WES_500k_LoF_MAF01__Hauck_ITPnHAI +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    scale(Standard.PRS.for.systemic.lupus.erythematosus..SLE.) +
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-
-model_logistic_regression <- glm(
-  as.factor(binary_ITP_or_AIHA_indivs) ~  WES_500k_LoF_MAF01__Hauck_ITPnHAI +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    scale(Standard.PRS.for.systemic.lupus.erythematosus..SLE.) +
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-
-
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-
-
-
-
-
-
-
-### subset SLE, binary_ITP
-
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.
-  )
-
-
-
-
-
-# Subset if needed
-df_subset <- df %>% 
-  filter(!is.na(SLE))
-nrow(df_subset)
-
-
-summary(glm(
-  as.factor(binary_ITP) ~  WES_500k_LoF_MAF01__Hauck_ITPnHAI +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    scale(Standard.PRS.for.systemic.lupus.erythematosus..SLE.) +
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-
-model_logistic_regression <- glm(
-  as.factor(binary_ITP) ~  WES_500k_LoF_MAF01__Hauck_ITPnHAI +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    scale(Standard.PRS.for.systemic.lupus.erythematosus..SLE.) +
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-
-
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-
-
-
-
-
-
-### subset SLE, binary_AIHA
-
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.
-  )
-
-
-
-
-
-# Subset if needed
-df_subset <- df %>% 
-  filter(!is.na(SLE))
-nrow(df_subset)
-
-
-summary(glm(
-  as.factor(binary_AIHA) ~  WES_500k_LoF_MAF01__Hauck_ITPnHAI +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    scale(Standard.PRS.for.systemic.lupus.erythematosus..SLE.) +
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-
-model_logistic_regression <- glm(
-  as.factor(binary_AIHA) ~  WES_500k_LoF_MAF01__Hauck_ITPnHAI +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    scale(Standard.PRS.for.systemic.lupus.erythematosus..SLE.) +
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-
-
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-
-
-
-
-
-
-
-# LOF + REVEL 0.9 variants
-# Variants LoF not HC
-# No PRS score
-# LoF_or_REVEL0.9 column created by the sum of LOF not HC column + REVEL0.9
-# No risk of overlapping variants, since REVEL are missense
-
-
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.
-  )
-
-
-
-
-
-# Create LoF_not_CH_revel_0.9 column
-annotated_table <- df  %>% 
-  mutate("LoF_not_CH_revel_0.9" = WES_500k_LoF_MAF01__Hauck_ITPnHAI + `list_ITPnHAI_maf_MAF01_revel_0.9_count`)
-
-
-# Subset if needed
-df_subset <- annotated_table %>% 
-  filter(!is.na(SLE))
-nrow(df_subset)
-
-
-
-# -Le risque de CAI chez les patients avec SLE. Ton modele doit être
-# ITP_or_AIHA_indivs ~ LOF + PRS + sexe + age + PC1-10 dans le sous groupe avec SLE
-summary(glm(as.factor(binary_ITP_or_AIHA_indivs) ~ LoF_not_CH_revel_0.9 + age_end_follow_up + omop_gender_concept_id + 
-              Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-              Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-              Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-              Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-              Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-            data=df_subset, family = binomial))
-
-
-sle_cai_logistic_regression <- glm(as.factor(binary_ITP_or_AIHA_indivs) ~ LoF_not_CH_revel_0.9 + age_end_follow_up + omop_gender_concept_id + 
-                                     Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-                                     Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-                                     Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-                                     Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-                                     Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-                                   data=df_subset, family = binomial)
-
-
-
-
-results <- tidy(sle_cai_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-
-
-
-
 
 
 
@@ -13977,7 +13035,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -14143,9 +13201,6 @@ print(results, digits = 3)
 # ____3.1 subset to !SLE (any diag age) --------------------------------------------
 
 
-### This analysis probably shjould be in 2), since it's done in the whole cohort and
-# section 3) concerns CAI patients subset
-
 
 
 
@@ -14159,7 +13214,7 @@ library(readxl)
 library(broom)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -14384,20 +13439,6 @@ print(results, digits = 3)
 
 
 # ____3.3 subset CAI glm SLE ~ PGS SLE --------------------------------------------
-#Canvas 3.3
-# @Stennio Faria: patients avec AIC en ayant enlevé ceux avec SLE avant AIC.
-
-
-# Faire modele de Cox multivarié
-# 
-# SLE ~ PGS_SLE + sex_label + age inclusion + 
-#     PC1 + PC2 + PC3 + PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + 
-#     PC10, data = subset(UKB, AIC =="1"),
-# 
-# Le temps 0 est le diagnostic de l’AIC
-# Puis séparer en PGS_SLE en 2 groupes par breakpoint defini plus faut. Comparaison des deux courbes par Cox univarié 
-
-
 
 
 # Supplemental table 5
@@ -14423,7 +13464,7 @@ library(OptSurvCutR)
 
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260514_summary_age_delays_score_LOF_SLE_LM_CH.tsv")  %>% 
+df <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -14683,7 +13724,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/003_inc_cumul_section3_SLE_CAI_1SD_for_prism.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -14698,10 +13739,6 @@ print('final table written')
 
 
 # _______AoU replication --------------------------------------------
-# Figure 2E: Il faut rajouter les résultats de AoU. 
-# Tu peux refaire les analyses toi avec la date de fin de suivi 
-# (régression logistique SLE ~ PGS SLE + age derniere nouvelle/sexe/PC chez les patients avec ITP/AHAI). 
-
 
 
 
@@ -14731,7 +13768,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -15001,7 +14038,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -15176,7 +14213,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -15417,7 +14454,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/003_first_article_replication/001_3p3_figure2E_AoU_PGS000196.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -15468,7 +14505,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -15659,7 +14696,7 @@ library(OptSurvCutR)
 
 
 
-df <- fread("/lustre09/project/6097258/stnfaria/ukb_rare_variants/000_whole_cohort/data/027_first_article_OptSurvCutR/20260514_summary_age_delays_score_LOF_SLE_LM_CH.tsv")  %>% 
+df <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -15858,7 +14895,7 @@ library(OptSurvCutR)
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -16054,7 +15091,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -16180,7 +15217,6 @@ cuts_result
 
 
 # ____3.4 CAI PRS stratified ---------------------------------------------------------------------
-# -UKB: Calculer OR et 95 CI association Score PRS stratifié avec CAI en multivarié
 
 ### CAI
 
@@ -16198,7 +15234,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -16336,7 +15372,7 @@ print(results, digits = 3)
 
 
 # ____3.5 subset CAI Cox SLE ~ PGS 1.662 ---------------------------------------------------------------------
-# -UKB: Calculer OR et 95 CI association Score PRS stratifié avec CAI en multivarié
+
 
 ### CAI
 
@@ -16354,7 +15390,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -16523,7 +15559,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/articles/first_year_phd_pubs/002_first_article/para_julie/Fig2F_survival_subset_CAI_SLE_PGS_1p662.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -16637,7 +15673,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -16930,7 +15966,7 @@ output <- df_subset %>%
 
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/articles/first_year_phd_pubs/002_first_article/para_rafael/003_fig3_UKB_4groups.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -16965,7 +16001,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -17138,7 +16174,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -17312,7 +16348,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -17479,7 +16515,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -17635,7 +16671,7 @@ output <- df_subset %>%
 
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/articles/first_year_phd_pubs/002_first_article/para_rafael/001_fig3_UKB_3groups.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -17742,7 +16778,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -17902,7 +16938,7 @@ output <- df_subset %>%
 
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/003_first_article_replication/data_for_rafael_figure/002_fig3_AoU_3groups.tsv" ,
+            file = "/FILE" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -18013,7 +17049,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt") 
+fread("file") 
 
 # Annotate lymphoid malignancies lower age
 df_lymphoid_malignancies_lower_age <- df %>% 
@@ -18098,7 +17134,7 @@ output <- df_score_LoF_SLE_LM_CH
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260514_summary_age_delays_score_LOF_SLE_LM_CH.tsv" ,
+            file = "file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -18134,7 +17170,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -18303,7 +17339,7 @@ output <- df_score_LoF_SLE_LM_CH
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260622_AoU_master_table_LoF_SLE_LM_CH.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -18336,7 +17372,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt") 
+fread("file") 
 
 # Annotate lymphoid malignancies lower age
 df_lymphoid_malignancies_lower_age <- df %>% 
@@ -18418,7 +17454,7 @@ output <- df_score_LoF_SLE_LM
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260623_summary_age_delays_score_LOF_SLE_LM.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -18459,7 +17495,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -18630,7 +17666,7 @@ output <- df_score_LoF_SLE_LM
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260624_AoU_master_table_LoF_SLE_LM.tsv" ,
+            file = "/file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -18666,7 +17702,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -18841,1941 +17877,10 @@ output <- df_score_LoF_SLE_LM
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260624_AoU_master_table_LoF_SLE_LM.tsv" ,
+            file = "file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
-
-
-
-
-
-
-
-
-
-
-# ____4.3 Cumulative incidence with score LOF_SLE_LM_CH -----------------------------------------------------------
-
-
-# _____4.3a Cutpoints OptSurvCutR -------------------------------------------------
-
-
-cat << \EOF > $UKBSCRIPTS/cutpoints_genetic_method.sh
-#!/bin/bash
-#SBATCH --job-name=2_3_cp_gen
-#SBATCH --output=2_3_cp_gen%j.out
-#SBATCH --error=2_3_cp_gen%j.err
-#SBATCH --time=7-00:00:00
-#SBATCH --mem=8G
-
-# Carregar módulos
-module load r/4.4.0
-
-# Configurações de performance
-export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-export R_MAX_NUM_DLLS=1000
-export MKL_NUM_THREADS=$SLURM_CPUS_PER_TASK
-
-# Executar com logging detalhado
-Rscript --vanilla --verbose -e '
-library(dplyr)
-library(OptSurvCutR)
-library(survival)
-
-# Configurar opções do R
-options(stringsAsFactors = FALSE)
-options(scipen = 999)
-
-set.seed(42)
-
-# Carregar dados
-cat("Carregando dados...\n")
-
-
-# CAI
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-library(tidyplots)
-library(lubridate)
-library(survival)
-library(survminer)
-library(ggsurvfit)
-library(OptSurvCutR)
-
-
-
-
-df <- fread("/lustre09/project/6097258/stnfaria/ukb_rare_variants/000_whole_cohort/data/027_first_article_OptSurvCutR/20260514_summary_age_delays_score_LOF_SLE_LM_CH.tsv")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.,
-         
-         # Score
-         score_LoF_SLE_LM_CH
-  )
-
-
-# Annotate lymphoid malignancies lower age
-df_lymphoid_malignancies_lower_age <- df %>% 
-  mutate(lymphoid_malignancies_lower_age = pmin(LYMPHOME_lower_age, Other_LEUK_lower_age, LLC_lower_age, na.rm = T))
-
-
-# Annotate binary lymphoid malignancies after CAI
-df_lymphoid_malignancies_after_CAI <- df_lymphoid_malignancies_lower_age %>% 
-  mutate(binary_lymphoid_malignancies_after_CAI_coded_as_zero = case_when(
-    !is.na(CAI_lower_age) & lymphoid_malignancies_lower_age > CAI_lower_age ~ "0",
-    is.na(lymphoid_malignancies_lower_age) ~ "0",
-    TRUE ~ "1"
-  ))
-
-
-
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_lymphoid_malignancies_after_CAI %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - age_inclusion,
-                                     age_end_follow_up - age_inclusion))
-
-
-
-
-# Convert ages from days to years BEFORE creating variables
-df_subset_years <- df_follow_up_duration %>%
-  mutate(
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    age_inclusion_years = age_inclusion / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - age_inclusion_years,
-                                      age_end_follow_up_years - age_inclusion_years
-    ))
-
-
-
-df_subset_cutpoints <- df_subset_years %>% 
-  select(score_LoF_SLE_LM_CH, follow_up_duration, binary_ITP_or_AIHA_indivs) %>% 
-  filter(follow_up_duration > 0) 
-
-
-# Opção 2: Limpar memória antes de rodar
-gc()
-
-
-# 2 cps
-
-# Opção 3: Rodar com método sistemático em vez de genético
-cuts_result <- find_cutpoint(
-  data = df_subset_cutpoints,
-  predictor = "score_LoF_SLE_LM_CH",
-  outcome_time = "follow_up_duration",
-  outcome_event = "binary_ITP_or_AIHA_indivs",
-  num_cuts = 2,
-  method = "genetic",
-  criterion = "logrank",
-  nmin = 50,
-  quiet = FALSE,
-  seed = 42
-)
-
-cuts_result
-
-
-# 3 cps 
-
-# Opção 3: Rodar com método sistemático em vez de genético
-cuts_result <- find_cutpoint(
-  data = df_subset_cutpoints,
-  predictor = "score_LoF_SLE_LM_CH",
-  outcome_time = "follow_up_duration",
-  outcome_event = "binary_ITP_or_AIHA_indivs",
-  num_cuts = 3,
-  method = "genetic",
-  criterion = "logrank",
-  nmin = 50,
-  quiet = FALSE,
-  seed = 42
-)
-
-cuts_result
-
-'
-
-
-EOF
-
-
-
-sbatch $UKBSCRIPTS/cutpoints_genetic_method.sh
-
-
-
-# ── Optimal Cut-point Analysis for Survival Data (Genetic) 
-# • Predictor: score_LoF_SLE_LM_CH
-# • Criterion: logrank
-# • Optimal Log-Rank Statistic: 2471.7215
-# ✔ Recommended Cut-point(s): 11.826 and 13.112
-
-
-
-
-# _____4.3b Analysis ------------------------------------------------------------
-
-
-
-# CAI
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-library(tidyplots)
-library(lubridate)
-library(survival)
-library(survminer)
-library(ggsurvfit)
-library(OptSurvCutR)
-
-
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260514_summary_age_delays_score_LOF_SLE_LM_CH.tsv")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.,
-         
-         # Score
-         score_LoF_SLE_LM_CH
-  )
-
-
-# Annotate lymphoid malignancies lower age
-df_lymphoid_malignancies_lower_age <- df %>% 
-  mutate(lymphoid_malignancies_lower_age = pmin(LYMPHOME_lower_age, Other_LEUK_lower_age, LLC_lower_age, na.rm = T))
-
-
-# Annotate binary lymphoid malignancies after CAI
-df_lymphoid_malignancies_after_CAI <- df_lymphoid_malignancies_lower_age %>% 
-  mutate(binary_lymphoid_malignancies_after_CAI_coded_as_zero = case_when(
-    !is.na(CAI_lower_age) & lymphoid_malignancies_lower_age > CAI_lower_age ~ "0",
-    is.na(lymphoid_malignancies_lower_age) ~ "0",
-    TRUE ~ "1"
-  ))
-
-
-
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_lymphoid_malignancies_after_CAI %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - age_inclusion,
-                                     age_end_follow_up - age_inclusion))
-
-
-
-
-# Convert ages from days to years BEFORE creating variables
-df_subset_years <- df_follow_up_duration %>%
-  mutate(
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    age_inclusion_years = age_inclusion / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - age_inclusion_years,
-                                      age_end_follow_up_years - age_inclusion_years
-    ))
-
-
-
-# 3 categories
-df_stratified_score_genetic_method <- df_subset_years %>% 
-  mutate(stratified_score_genetic_method = case_when(
-    score_LoF_SLE_LM_CH <= 11.826 ~ "low_risk",
-    score_LoF_SLE_LM_CH > 11.826 & score_LoF_SLE_LM_CH <= 13.112 ~ "medium_risk",
-    score_LoF_SLE_LM_CH > 13.112 ~ "high_risk"
-  ))
-
-
-
-
-# Subset if needed
-df_subset <- df_stratified_score_genetic_method %>% 
-  filter(follow_up_duration > 0) 
-nrow(df_subset)
-
-
-
-freqs <- table(df_subset$stratified_score_genetic_method) %>% as.data.frame()
-
-
-### Cox model
-
-# Multivariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method +
-    Age.at.recruitment + 
-    omop_gender_concept_id + 
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-### Univariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method,
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-# Very positive
-### Puis tracer incidence cumulative AIC en fonction de LOF temps 0= naissance. evenement: diag AIC
-# First, create binary variable very positive or not
-df_subset$very_positive_binary <- ifelse(df_subset$stratified_score_genetic_method == "very_positive" , 1, 0)
-
-
-
-# Kaplan-Meier curve (equivalent to Cox model with binary variable)
-fit_km <- survfit(Surv(follow_up_duration_years, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method,
-                  data = df_subset)
-
-fit_km
-
-
-
-### Graph formatting
-# Plot without X axis initially
-plot(fit_km, 
-     fun = "event",                # Cumulative incidence (1 - survival)
-     col = c("blue", "red"),
-     lwd = 2,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "Cumulative incidence curve (Kaplan-Meier). Combined LOF SLE LM CH score - genetic method cutpoints",
-     xaxt = "n")                   # Suppresses automatic X axis
-
-# Add manual X axis with 5-year intervals
-max_age <- max(df_subset$follow_up_duration_years, na.rm = TRUE)
-breaks_x <- seq(0, ceiling(max_age/5)*5, by = 5)
-
-axis(side = 1, at = breaks_x, labels = breaks_x)
-
-# Add vertical grid at the breaks
-abline(v = breaks_x, col = "lightgray", lty = 2)
-
-# Add legend
-legend("bottomright",
-       legend = c("Non-carriers", "Carriers"),
-       col = c("blue", "red"),
-       lwd = 2)
-###
-
-
-
-
-
-### Save the plot as PNG
-setwd("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/009_first_article/001_cox_curves")
-png("005_combined_genetic_method_LOF_SLE_LM_CH_score_survival.png", width = 8, height = 6, units = "in", res = 300)
-
-# Re-run the plotting code to save
-
-
-
-### Graph formatting
-# Plot without X axis initially
-plot(fit_km, 
-     fun = "event",                # Cumulative incidence (1 - survival)
-     col = c("blue", "red"),
-     lwd = 2,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "Cumulative incidence curve (Kaplan-Meier). Combined LOF SLE LM CH score - genetic method cutpoints",
-     xaxt = "n")                   # Suppresses automatic X axis
-
-# Add manual X axis with 5-year intervals
-max_age <- max(df_subset$follow_up_duration_years, na.rm = TRUE)
-breaks_x <- seq(0, ceiling(max_age/5)*5, by = 5)
-
-axis(side = 1, at = breaks_x, labels = breaks_x)
-
-# Add vertical grid at the breaks
-abline(v = breaks_x, col = "lightgray", lty = 2)
-
-# Add legend
-legend("bottomright",
-       legend = c("Non-carriers", "Carriers"),
-       col = c("blue", "red"),
-       lwd = 2)
-###
-
-
-dev.off()
-
-# Confirm save location
-message("Plot saved as: cumulative_incidence_curve_km.png in ", getwd())
-
-
-
-
-
-
-
-
-# Export data to creawte graph on graphpad prism
-
-output <- df_subset %>% 
-  select(follow_up_duration_years, binary_ITP_or_AIHA_indivs,  stratified_score_genetic_method)
-
-
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/003_stratified_score_genetic_method_for_prism.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
-
-
-
-
-
-# ______AoU replication------------------------------------------------------------
-
-
-
-
-# CAI
-required_packages <- c("data.table", 
-                       "dplyr", 
-                       "tidyr", 
-                       "stringr", 
-                       "readxl", 
-                       "broom", 
-                       "ggplot2", 
-                       "tidyplots",
-                       "lubridate",
-                       "survival",
-                       "ggsurvfit")
-
-for (pkg in required_packages) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, dependencies = TRUE)
-  }
-  library(pkg, character.only = TRUE)
-}
-
-
-
-
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260622_AoU_master_table_LoF_SLE_LM_CH.tsv") %>% 
-  select(
-    # General data
-    person_id,
-    date_end_follow_up,
-    age_end_follow_up,
-    sex_genetic,
-    year_of_birth,
-    biosample_collection_age,
-    span_age_end_follow_up_age_inclusion,
-    Age.at.recruitment,
-    
-    # Diagnostics
-    TPI,
-    HAI,
-    SLE,
-    LLC,
-    LYMPHOME,
-    Other_LEUK,
-    CH_Age_sample,
-    
-    # Binaries 
-    binary_ITP_or_AIHA_indivs,
-    binary_AIHA,
-    binary_ITP,
-    binary_SLE,
-    binary_LLC,
-    binary_LYMPHOME,
-    binary_Other_LEUK,
-    binary_CH_Age_sample,
-    
-    # Lower age
-    AIHA_lower_age,
-    TPI_lower_age,
-    CAI_lower_age,
-    SLE_lower_age,
-    LYMPHOME_lower_age,
-    Other_LEUK_lower_age,
-    LLC_lower_age,
-    CH_Age_sample_lower_age,
-    
-    # Covariates
-    score_LoF_SLE_LM_CH,
-    AoU_LoF_MAF01__Hauck_ITPnHAI,
-    PGS000196,
-    PGS004917,
-    PC1,
-    PC2,
-    PC3,
-    PC4,
-    PC5,
-    PC6,
-    PC7,
-    PC8,
-    PC9,
-    PC10
-  ) 
-
-
-
-
-# Annotate lymphoid malignancies lower age
-df_lymphoid_malignancies_lower_age <- df %>% 
-  mutate(lymphoid_malignancies_lower_age = pmin(LYMPHOME_lower_age, Other_LEUK_lower_age, LLC_lower_age, na.rm = T))
-
-
-# Annotate binary lymphoid malignancies after CAI
-df_lymphoid_malignancies_after_CAI <- df_lymphoid_malignancies_lower_age %>% 
-  mutate(binary_lymphoid_malignancies_after_CAI_coded_as_zero = case_when(
-    !is.na(CAI_lower_age) & lymphoid_malignancies_lower_age > CAI_lower_age ~ "0",
-    is.na(lymphoid_malignancies_lower_age) ~ "0",
-    TRUE ~ "1"
-  ))
-
-
-
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_lymphoid_malignancies_after_CAI %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - biosample_collection_age,
-                                     age_end_follow_up - biosample_collection_age))
-
-
-
-
-# Convert ages from days to years BEFORE creating variables
-df_subset_years <- df_follow_up_duration %>%
-  mutate(
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    age_inclusion_years = biosample_collection_age / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - age_inclusion_years,
-                                      age_end_follow_up_years - age_inclusion_years
-    ))
-
-
-
-
-
-# 3 categories
-df_stratified_score_genetic_method <- df_subset_years %>% 
-  mutate(stratified_score_genetic_method = case_when(
-    score_LoF_SLE_LM_CH <= 11.826 ~ "low_risk",
-    score_LoF_SLE_LM_CH > 11.826 & score_LoF_SLE_LM_CH <= 13.112 ~ "medium_risk",
-    score_LoF_SLE_LM_CH > 13.112 ~ "high_risk"
-  ))
-
-
-nrow(df_stratified_score_genetic_method)
-
-
-
-
-
-# CAI avant prise sang: enlever
-df_CAI_before_blood_draw <- df_stratified_score_genetic_method %>% 
-  mutate(CAI_before_blood_draw = case_when(
-    !is.na(CAI_lower_age) & as.numeric(CAI_lower_age) < as.numeric(biosample_collection_age) ~ "1",
-    is.na(CAI_lower_age) ~ "0",
-    TRUE ~ "0"
-  ))
-
-table(df_CAI_before_blood_draw$CAI_before_blood_draw)
-
-
-nrow(df_CAI_before_blood_draw)
-
-
-
-# Subset if needed
-df_subset <- df_CAI_before_blood_draw %>% 
-  filter(follow_up_duration > 0) %>% 
-  filter(CAI_before_blood_draw != 1)
-
-nrow(df_subset)
-
-
-
-
-table(df_subset$stratified_score_genetic_method)
-
-
-
-
-### Cox model
-
-# Multivariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method +
-    Age.at.recruitment + 
-    sex_genetic + 
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-### Univariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method,
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-# Kaplan-Meier curve (equivalent to Cox model with binary variable)
-fit_km <- survfit(Surv(follow_up_duration_years, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method,
-                  data = df_subset)
-
-fit_km
-
-
-
-
-
-
-
-
-# Definir margens (um pouco mais espaçoso para a legenda)
-par(mar = c(4, 4, 3, 2) + 0.1)
-
-# Definir paleta de cores mais atraente
-cores <- c("high_risk" = "#D73027",    # Vermelho escuro
-           "medium_risk" = "#FDBB84",  # Laranja claro
-           "low_risk" = "#4575B4")     # Azul escuro
-
-# Plotar o gráfico
-plot(fit_km, 
-     fun = "event",
-     col = c("#D73027", "#4575B4", "#FDBB84"),  # Ordem: high_risk, low_risk, medium_risk
-     lwd = 2.5,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "Cumulative incidence curve (Kaplan-Meier). Combined LOF SLE LM CH score - genetic method cutpoints",
-     xaxt = "n")
-
-# Adicionar eixo X
-axis(1, at = seq(0, max(df_subset$follow_up_duration_years, na.rm = TRUE), by = 5))
-
-# Adicionar legenda com as cores corretas
-legend("topleft",
-       legend = c("High risk", "Medium risk", "Low risk"),
-       col = c("#D73027", "#FDBB84", "#4575B4"),
-       lwd = 2.5,
-       lty = 1,
-       bty = "o",
-       cex = 0.9,
-       title = "Risk category")
-
-
-
-
-
-
-### Save the plot as PNG
-setwd("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/009_first_article/001_cox_curves")
-png("005_combined_genetic_method_LOF_SLE_LM_CH_score_survival.png", width = 8, height = 6, units = "in", res = 300)
-
-# Re-run the plotting code to save
-
-
-
-### Graph formatting
-# Plot without X axis initially
-plot(fit_km, 
-     fun = "event",                # Cumulative incidence (1 - survival)
-     col = c("blue", "red"),
-     lwd = 2,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "Cumulative incidence curve (Kaplan-Meier). Combined LOF SLE LM CH score - genetic method cutpoints",
-     xaxt = "n")                   # Suppresses automatic X axis
-
-# Add manual X axis with 5-year intervals
-max_age <- max(df_subset$follow_up_duration_years, na.rm = TRUE)
-breaks_x <- seq(0, ceiling(max_age/5)*5, by = 5)
-
-axis(side = 1, at = breaks_x, labels = breaks_x)
-
-# Add vertical grid at the breaks
-abline(v = breaks_x, col = "lightgray", lty = 2)
-
-# Add legend
-legend("bottomright",
-       legend = c("Non-carriers", "Carriers"),
-       col = c("blue", "red"),
-       lwd = 2)
-###
-
-
-dev.off()
-
-# Confirm save location
-message("Plot saved as: cumulative_incidence_curve_km.png in ", getwd())
-
-
-
-
-
-
-
-
-# Export data to creawte graph on graphpad prism
-
-output <- df_subset %>% 
-  select(follow_up_duration_years, binary_ITP_or_AIHA_indivs,  stratified_score_genetic_method)
-
-
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/003_stratified_score_genetic_method_for_prism.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
-
-
-
-
-
-
-# _____ (legacy)4.3c UKB stratified score - no HC ------------------------------------------------------------
-
-
-# ______4.3d Cutpoints OptSurvCutR -------------------------------------------------
-
-
-
-# Configure R options
-options(stringsAsFactors = FALSE)
-options(scipen = 999)
-
-set.seed(42)
-
-
-# CAI
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-library(tidyplots)
-library(lubridate)
-library(survival)
-library(survminer)
-
-
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260623_summary_age_delays_score_LOF_SLE_LM.tsv")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.,
-         
-         # Score
-         score_LoF_SLE_LM
-  )
-
-
-# Annotate lymphoid malignancies lower age
-df_lymphoid_malignancies_lower_age <- df %>% 
-  mutate(lymphoid_malignancies_lower_age = pmin(LYMPHOME_lower_age, Other_LEUK_lower_age, LLC_lower_age, na.rm = T))
-
-
-# Annotate binary lymphoid malignancies after CAI
-df_lymphoid_malignancies_after_CAI <- df_lymphoid_malignancies_lower_age %>% 
-  mutate(binary_lymphoid_malignancies_after_CAI_coded_as_zero = case_when(
-    !is.na(CAI_lower_age) & lymphoid_malignancies_lower_age > CAI_lower_age ~ "0",
-    is.na(lymphoid_malignancies_lower_age) ~ "0",
-    TRUE ~ "1"
-  ))
-
-
-
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_lymphoid_malignancies_after_CAI %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - age_inclusion,
-                                     age_end_follow_up - age_inclusion))
-
-
-
-
-# Convert ages from days to years BEFORE creating variables
-df_subset_years <- df_follow_up_duration %>%
-  mutate(
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    age_inclusion_years = age_inclusion / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - age_inclusion_years,
-                                      age_end_follow_up_years - age_inclusion_years
-    ))
-
-
-
-df_subset_cutpoints <- df_subset_years %>% 
-  select(score_LoF_SLE_LM, follow_up_duration, binary_ITP_or_AIHA_indivs) %>% 
-  filter(follow_up_duration > 0) 
-
-
-# Opção 2: Limpar memória antes de rodar
-gc()
-
-
-# 2 cps
-
-# Opção 3: Rodar com método sistemático em vez de genético
-cuts_result <- find_cutpoint(
-  data = df_subset_cutpoints,
-  predictor = "score_LoF_SLE_LM",
-  outcome_time = "follow_up_duration",
-  outcome_event = "binary_ITP_or_AIHA_indivs",
-  num_cuts = 2,
-  method = "genetic",
-  criterion = "logrank",
-  nmin = 50,
-  quiet = FALSE,
-  seed = 42
-)
-
-cuts_result
-
-
-
-# ── Optimal Cut-point Analysis for Survival Data (Genetic) 
-# • Predictor: score_LoF_SLE_LM
-# • Criterion: logrank
-# • Optimal Log-Rank Statistic: 2424.2298
-# ✔ Recommended Cut-point(s): 12.465 and 13.758
-
-
-# ______4.3e Analysis ------------------------------------------------------------
-
-# CAI
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-library(tidyplots)
-library(lubridate)
-library(survival)
-library(survminer)
-library(ggsurvfit)
-library(OptSurvCutR)
-
-
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260623_summary_age_delays_score_LOF_SLE_LM.tsv")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.,
-         
-         # Score
-         score_LoF_SLE_LM
-  )
-
-
-# Annotate lymphoid malignancies lower age
-df_lymphoid_malignancies_lower_age <- df %>% 
-  mutate(lymphoid_malignancies_lower_age = pmin(LYMPHOME_lower_age, Other_LEUK_lower_age, LLC_lower_age, na.rm = T))
-
-
-# Annotate binary lymphoid malignancies after CAI
-df_lymphoid_malignancies_after_CAI <- df_lymphoid_malignancies_lower_age %>% 
-  mutate(binary_lymphoid_malignancies_after_CAI_coded_as_zero = case_when(
-    !is.na(CAI_lower_age) & lymphoid_malignancies_lower_age > CAI_lower_age ~ "0",
-    is.na(lymphoid_malignancies_lower_age) ~ "0",
-    TRUE ~ "1"
-  ))
-
-
-
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_lymphoid_malignancies_after_CAI %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - age_inclusion,
-                                     age_end_follow_up - age_inclusion))
-
-
-
-
-# Convert ages from days to years BEFORE creating variables
-df_subset_years <- df_follow_up_duration %>%
-  mutate(
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    age_inclusion_years = age_inclusion / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - age_inclusion_years,
-                                      age_end_follow_up_years - age_inclusion_years
-    ))
-
-
-
-# 3 categories
-df_stratified_score_genetic_method <- df_subset_years %>% 
-  mutate(stratified_score_genetic_method = case_when(
-    score_LoF_SLE_LM <= 12.465 ~ "low_risk",
-    score_LoF_SLE_LM > 12.465 & score_LoF_SLE_LM <= 13.758 ~ "medium_risk",
-    score_LoF_SLE_LM > 13.758 ~ "high_risk"
-  ))
-
-
-
-
-# Subset if needed
-df_subset <- df_stratified_score_genetic_method %>% 
-  filter(follow_up_duration > 0) 
-nrow(df_subset)
-
-
-
-table(df_subset$stratified_score_genetic_method)
-
-
-### Cox model
-
-# Multivariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method +
-    Age.at.recruitment + 
-    omop_gender_concept_id + 
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-### Univariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method,
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-
-
-
-# Kaplan-Meier curve (equivalent to Cox model with binary variable)
-fit_km <- survfit(Surv(follow_up_duration_years, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method,
-                  data = df_subset)
-
-fit_km
-
-
-
-
-
-
-
-
-# Definir margens (um pouco mais espaçoso para a legenda)
-par(mar = c(4, 4, 3, 2) + 0.1)
-
-# Definir paleta de cores mais atraente
-cores <- c("high_risk" = "#D73027",    # Vermelho escuro
-           "medium_risk" = "#FDBB84",  # Laranja claro
-           "low_risk" = "#4575B4")     # Azul escuro
-
-# Plotar o gráfico
-plot(fit_km, 
-     fun = "event",
-     col = c("#D73027", "#4575B4", "#FDBB84"),  # Ordem: high_risk, low_risk, medium_risk
-     lwd = 2.5,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "Cumulative incidence curve (Kaplan-Meier). Combined LOF SLE LM score - genetic method cutpoints",
-     xaxt = "n")
-
-# Adicionar eixo X
-axis(1, at = seq(0, max(df_subset$follow_up_duration_years, na.rm = TRUE), by = 5))
-
-# Adicionar legenda com as cores corretas
-legend("topleft",
-       legend = c("High risk", "Medium risk", "Low risk"),
-       col = c("#D73027", "#FDBB84", "#4575B4"),
-       lwd = 2.5,
-       lty = 1,
-       bty = "o",
-       cex = 0.9,
-       title = "Risk category")
-
-
-
-
-
-
-
-
-
-
-
-# Export data to creawte graph on graphpad prism
-
-output <- df_subset %>% 
-  select(follow_up_duration_years, binary_ITP_or_AIHA_indivs,  stratified_score_genetic_method)
-
-
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/003_stratified_score_genetic_method_for_prism.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
-
-
-# ______AoU replication ------------------------------------------------------------
-
-
-
-
-# CAI
-required_packages <- c("data.table", 
-                       "dplyr", 
-                       "tidyr", 
-                       "stringr", 
-                       "readxl", 
-                       "broom", 
-                       "ggplot2", 
-                       "tidyplots",
-                       "lubridate",
-                       "survival",
-                       "ggsurvfit")
-
-for (pkg in required_packages) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, dependencies = TRUE)
-  }
-  library(pkg, character.only = TRUE)
-}
-
-
-
-
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260624_AoU_master_table_LoF_SLE_LM.tsv") %>% 
-  select(
-    # General data
-    person_id,
-    date_end_follow_up,
-    age_end_follow_up,
-    sex_genetic,
-    year_of_birth,
-    biosample_collection_age,
-    span_age_end_follow_up_age_inclusion,
-    Age.at.recruitment,
-    
-    # Diagnostics
-    TPI,
-    HAI,
-    SLE,
-    LLC,
-    LYMPHOME,
-    Other_LEUK,
-    CH_Age_sample,
-    
-    # Binaries 
-    binary_ITP_or_AIHA_indivs,
-    binary_AIHA,
-    binary_ITP,
-    binary_SLE,
-    binary_LLC,
-    binary_LYMPHOME,
-    binary_Other_LEUK,
-    binary_CH_Age_sample,
-    
-    # Lower age
-    AIHA_lower_age,
-    TPI_lower_age,
-    CAI_lower_age,
-    SLE_lower_age,
-    LYMPHOME_lower_age,
-    Other_LEUK_lower_age,
-    LLC_lower_age,
-    CH_Age_sample_lower_age,
-    
-    # Covariates
-    score_LoF_SLE_LM,
-    AoU_LoF_MAF01__Hauck_ITPnHAI,
-    PGS000196,
-    PGS004917,
-    PC1,
-    PC2,
-    PC3,
-    PC4,
-    PC5,
-    PC6,
-    PC7,
-    PC8,
-    PC9,
-    PC10
-  ) 
-
-
-
-
-# Annotate lymphoid malignancies lower age
-df_lymphoid_malignancies_lower_age <- df %>% 
-  mutate(lymphoid_malignancies_lower_age = pmin(LYMPHOME_lower_age, Other_LEUK_lower_age, LLC_lower_age, na.rm = T))
-
-
-# Annotate binary lymphoid malignancies after CAI
-df_lymphoid_malignancies_after_CAI <- df_lymphoid_malignancies_lower_age %>% 
-  mutate(binary_lymphoid_malignancies_after_CAI_coded_as_zero = case_when(
-    !is.na(CAI_lower_age) & lymphoid_malignancies_lower_age > CAI_lower_age ~ "0",
-    is.na(lymphoid_malignancies_lower_age) ~ "0",
-    TRUE ~ "1"
-  ))
-
-
-
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_lymphoid_malignancies_after_CAI %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - biosample_collection_age,
-                                     age_end_follow_up - biosample_collection_age))
-
-
-
-
-# Convert ages from days to years BEFORE creating variables
-df_subset_years <- df_follow_up_duration %>%
-  mutate(
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    age_inclusion_years = biosample_collection_age / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - age_inclusion_years,
-                                      age_end_follow_up_years - age_inclusion_years
-    ))
-
-
-
-
-
-# 3 categories
-df_stratified_score_genetic_method <- df_subset_years %>% 
-  mutate(stratified_score_genetic_method = case_when(
-    score_LoF_SLE_LM <= 12.465 ~ "low_risk",
-    score_LoF_SLE_LM > 12.465 & score_LoF_SLE_LM <= 13.758 ~ "medium_risk",
-    score_LoF_SLE_LM > 13.758 ~ "high_risk"
-  ))
-
-
-nrow(df_stratified_score_genetic_method)
-
-
-
-
-
-# CAI avant prise sang: enlever
-df_CAI_before_blood_draw <- df_stratified_score_genetic_method %>% 
-  mutate(CAI_before_blood_draw = case_when(
-    !is.na(CAI_lower_age) & as.numeric(CAI_lower_age) < as.numeric(biosample_collection_age) ~ "1",
-    is.na(CAI_lower_age) ~ "0",
-    TRUE ~ "0"
-  ))
-
-table(df_CAI_before_blood_draw$CAI_before_blood_draw)
-
-
-nrow(df_CAI_before_blood_draw)
-
-# Subset if needed
-df_subset <- df_CAI_before_blood_draw %>% 
-  filter(follow_up_duration > 0) %>% 
-  filter(CAI_before_blood_draw != 1)
-
-nrow(df_subset)
-
-
-
-table(df_subset$stratified_score_genetic_method)
-
-
-
-
-### Cox model
-
-# Multivariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method +
-    Age.at.recruitment + 
-    sex_genetic + 
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-### Univariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method,
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-# Kaplan-Meier curve (equivalent to Cox model with binary variable)
-fit_km <- survfit(Surv(follow_up_duration_years, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method,
-                  data = df_subset)
-
-fit_km
-
-
-
-
-
-
-
-# Use smaller margins
-par(mar = c(4, 4, 2, 1) + 0.1)  # Reduced from c(4,4,3,2)
-
-# Then plot
-plot(fit_km, 
-     fun = "event",
-     col = c("#D73027", "#4575B4", "#FDBB84"),
-     lwd = 2.5,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "Cumulative incidence curve (Kaplan-Meier). Combined LOF SLE LM CH score - genetic method cutpoints",
-     xaxt = "n")
-
-
-
-
-
-
-
-
-
-
-### Save the plot as PNG
-setwd("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/009_first_article/001_cox_curves")
-png("005_combined_genetic_method_LOF_SLE_LM_CH_score_survival.png", width = 8, height = 6, units = "in", res = 300)
-
-# Re-run the plotting code to save
-
-
-
-### Graph formatting
-# Plot without X axis initially
-plot(fit_km, 
-     fun = "event",                # Cumulative incidence (1 - survival)
-     col = c("blue", "red"),
-     lwd = 2,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "Cumulative incidence curve (Kaplan-Meier). Combined LOF SLE LM CH score - genetic method cutpoints",
-     xaxt = "n")                   # Suppresses automatic X axis
-
-# Add manual X axis with 5-year intervals
-max_age <- max(df_subset$follow_up_duration_years, na.rm = TRUE)
-breaks_x <- seq(0, ceiling(max_age/5)*5, by = 5)
-
-axis(side = 1, at = breaks_x, labels = breaks_x)
-
-# Add vertical grid at the breaks
-abline(v = breaks_x, col = "lightgray", lty = 2)
-
-# Add legend
-legend("bottomright",
-       legend = c("Non-carriers", "Carriers"),
-       col = c("blue", "red"),
-       lwd = 2)
-###
-
-
-dev.off()
-
-# Confirm save location
-message("Plot saved as: cumulative_incidence_curve_km.png in ", getwd())
-
-
-
-
-
-
-
-
-# Export data to creawte graph on graphpad prism
-
-output <- df_subset %>% 
-  select(follow_up_duration_years, binary_ITP_or_AIHA_indivs,  stratified_score_genetic_method)
-
-
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/003_stratified_score_genetic_method_for_prism.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
-
-# ______4.3f AoU rep: first condition age ------------------------------------------------------------
-
-
-
-
-# CAI
-
-required_packages <- c("data.table", 
-                       "dplyr", 
-                       "tidyr", 
-                       "stringr", 
-                       "readxl", 
-                       "broom",
-                       "lubridate",
-                       "survival",
-                       "ggsurvfit")
-
-for (pkg in required_packages) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, dependencies = TRUE)
-  }
-  library(pkg, character.only = TRUE)
-}
-
-
-
-
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260624_AoU_master_table_LoF_SLE_LM.tsv") %>% 
-  select(
-    # General data
-    person_id,
-    date_end_follow_up,
-    age_end_follow_up,
-    sex_genetic,
-    year_of_birth,
-    #    first_condition_date,
-    #    first_condition_year,
-    first_condition_age,
-    biosample_collection_age,
-    span_age_end_follow_up_age_inclusion,
-    Age.at.recruitment,
-    
-    # Diagnostics
-    TPI,
-    HAI,
-    SLE,
-    LLC,
-    LYMPHOME,
-    Other_LEUK,
-    CH_Age_sample,
-    
-    # Binaries 
-    binary_ITP_or_AIHA_indivs,
-    binary_AIHA,
-    binary_ITP,
-    binary_SLE,
-    binary_LLC,
-    binary_LYMPHOME,
-    binary_Other_LEUK,
-    binary_CH_Age_sample,
-    
-    # Lower age
-    AIHA_lower_age,
-    TPI_lower_age,
-    CAI_lower_age,
-    SLE_lower_age,
-    LYMPHOME_lower_age,
-    Other_LEUK_lower_age,
-    LLC_lower_age,
-    CH_Age_sample_lower_age,
-    
-    # Covariates
-    score_LoF_SLE_LM,
-    AoU_LoF_MAF01__Hauck_ITPnHAI,
-    PGS000196,
-    PGS004917,
-    PC1,
-    PC2,
-    PC3,
-    PC4,
-    PC5,
-    PC6,
-    PC7,
-    PC8,
-    PC9,
-    PC10
-  ) 
-
-
-
-
-
-
-# Annotate lymphoid malignancies lower age
-df_lymphoid_malignancies_lower_age <- df %>% 
-  mutate(lymphoid_malignancies_lower_age = pmin(LYMPHOME_lower_age, Other_LEUK_lower_age, LLC_lower_age, na.rm = T))
-
-
-# Annotate binary lymphoid malignancies after CAI
-df_lymphoid_malignancies_after_CAI <- df_lymphoid_malignancies_lower_age %>% 
-  mutate(binary_lymphoid_malignancies_after_CAI_coded_as_zero = case_when(
-    !is.na(CAI_lower_age) & lymphoid_malignancies_lower_age > CAI_lower_age ~ "0",
-    is.na(lymphoid_malignancies_lower_age) ~ "0",
-    TRUE ~ "1"
-  ))
-
-
-
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_lymphoid_malignancies_after_CAI %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - first_condition_age,
-                                     age_end_follow_up - first_condition_age))
-
-
-
-
-# Convert ages from days to years BEFORE creating variables
-df_subset_years <- df_follow_up_duration %>%
-  mutate(
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    age_inclusion_years = first_condition_age / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - age_inclusion_years,
-                                      age_end_follow_up_years - age_inclusion_years
-    ))
-
-
-
-
-
-# 3 categories
-df_stratified_score_genetic_method <- df_subset_years %>% 
-  mutate(stratified_score_genetic_method = case_when(
-    score_LoF_SLE_LM <= 12.465 ~ "low_risk",
-    score_LoF_SLE_LM > 12.465 & score_LoF_SLE_LM <= 13.758 ~ "medium_risk",
-    score_LoF_SLE_LM > 13.758 ~ "high_risk"
-  ))
-
-
-nrow(df_stratified_score_genetic_method)
-
-
-
-
-
-# CAI avant prise sang: enlever
-df_CAI_before_blood_draw <- df_stratified_score_genetic_method %>% 
-  mutate(CAI_before_blood_draw = case_when(
-    !is.na(CAI_lower_age) & as.numeric(CAI_lower_age) < as.numeric(first_condition_age) ~ "1",
-    is.na(CAI_lower_age) ~ "0",
-    TRUE ~ "0"
-  ))
-
-table(df_CAI_before_blood_draw$CAI_before_blood_draw)
-
-
-nrow(df_CAI_before_blood_draw)
-
-# Subset if needed
-df_subset <- df_CAI_before_blood_draw %>% 
-  filter(follow_up_duration > 0) %>% 
-  filter(CAI_before_blood_draw != 1)
-
-nrow(df_subset)
-
-
-
-table(df_subset$stratified_score_genetic_method)
-
-
-
-
-### Cox model
-
-# Multivariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method +
-    Age.at.recruitment + 
-    sex_genetic + 
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-### Univariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method,
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-# Kaplan-Meier curve (equivalent to Cox model with binary variable)
-fit_km <- survfit(Surv(follow_up_duration_years, binary_ITP_or_AIHA_indivs) ~ stratified_score_genetic_method,
-                  data = df_subset)
-
-fit_km
-
-
-
-
-
-
-
-# Use smaller margins
-par(mar = c(4, 4, 2, 1) + 0.1)  # Reduced from c(4,4,3,2)
-
-# Then plot
-plot(fit_km, 
-     fun = "event",
-     col = c("#D73027", "#4575B4", "#FDBB84"),
-     lwd = 2.5,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "Cumulative incidence curve (Kaplan-Meier). Combined LOF SLE LM CH score - genetic method cutpoints",
-     xaxt = "n")
-
-
-
-
-
-
-
-
-
-
-### Save the plot as PNG
-setwd("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/009_first_article/001_cox_curves")
-png("005_combined_genetic_method_LOF_SLE_LM_CH_score_survival.png", width = 8, height = 6, units = "in", res = 300)
-
-# Re-run the plotting code to save
-
-
-
-### Graph formatting
-# Plot without X axis initially
-plot(fit_km, 
-     fun = "event",                # Cumulative incidence (1 - survival)
-     col = c("blue", "red"),
-     lwd = 2,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "Cumulative incidence curve (Kaplan-Meier). Combined LOF SLE LM CH score - genetic method cutpoints",
-     xaxt = "n")                   # Suppresses automatic X axis
-
-# Add manual X axis with 5-year intervals
-max_age <- max(df_subset$follow_up_duration_years, na.rm = TRUE)
-breaks_x <- seq(0, ceiling(max_age/5)*5, by = 5)
-
-axis(side = 1, at = breaks_x, labels = breaks_x)
-
-# Add vertical grid at the breaks
-abline(v = breaks_x, col = "lightgray", lty = 2)
-
-# Add legend
-legend("bottomright",
-       legend = c("Non-carriers", "Carriers"),
-       col = c("blue", "red"),
-       lwd = 2)
-###
-
-
-dev.off()
-
-# Confirm save location
-message("Plot saved as: cumulative_incidence_curve_km.png in ", getwd())
-
-
-
-
-
-
-
-
-# Export data to creawte graph on graphpad prism
-
-output <- df_subset %>% 
-  select(follow_up_duration_years, binary_ITP_or_AIHA_indivs,  stratified_score_genetic_method)
-
-
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/003_stratified_score_genetic_method_for_prism.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
 
 
 
@@ -20815,7 +17920,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt") 
+fread("file") 
 
 # Annotate lymphoid malignancies lower age
 df_lymphoid_malignancies_lower_age <- df %>% 
@@ -21169,7 +18274,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/articles/first_year_phd_pubs/002_first_article/para_julie/Fig3/001_fig3B_UKB_3riks_1p5SD.tsv" ,
+            file = "file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -21332,7 +18437,7 @@ output <- df_subset %>%
 # Write output
 print('writing final table')
 write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/to_prism/44a_UKB_3_risks_2SD.tsv" ,
+            file = "file" ,
             sep = "\t", row.names = F, col.names = T , quote = F)
 
 print('final table written')
@@ -21356,7 +18461,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt") 
+fread("file") 
 
 # Annotate lymphoid malignancies lower age
 df_lymphoid_malignancies_lower_age <- df %>% 
@@ -21466,17 +18571,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, binary_lymphoid_malignancies_after_CAI_coded_as_zero)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/to_prism/44a_UKB_LM_only.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
 
 
 # _________LoF -----------------------------------------------------------
@@ -21495,7 +18589,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt") 
+fread("file") 
 
 # Annotate lymphoid malignancies lower age
 df_lymphoid_malignancies_lower_age <- df %>% 
@@ -21606,18 +18700,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, WES_500k_LoF_MAF01__Hauck_ITPnHAI)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/to_prism/44a_UKB_LoF_only.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
-
 
 
 
@@ -21639,7 +18721,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt") 
+fread("file") 
 
 # Annotate lymphoid malignancies lower age
 df_lymphoid_malignancies_lower_age <- df %>% 
@@ -21799,14 +18881,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, binary_SLE)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/to_prism/44a_UKB_SLE_1SD_only.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
 
 
 
@@ -21908,16 +18982,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, binary_SLE)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/to_prism/44a_UKB_SLE_2SD_only.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
 
 
 
@@ -21949,7 +19013,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -22236,15 +19300,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, second_score)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/001_44_second_score_no_HC/44a_AoU_3_risks_1SD.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
 
 
 
@@ -22404,19 +19459,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, second_score)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/003_first_article_replication/004_fig_3/002_fig3B_AoU_3riks_1p5SD.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-r
-
-
 
 
 
@@ -22573,16 +19615,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, second_score)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/001_44_second_score_no_HC/44a_AoU_3_risks_2SD.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
 
 
 
@@ -22609,7 +19641,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -22782,18 +19814,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, binary_lymphoid_malignancies_after_CAI_coded_as_zero)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/001_44_second_score_no_HC/44a_AoU_LM_only.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
-
 
 # _________LoF -----------------------------------------------------------
 
@@ -22818,7 +19838,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -22991,16 +20011,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, AoU_LoF_MAF01__Hauck_ITPnHAI)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/001_44_second_score_no_HC/44a_AoU_LoF_only.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
 
 
 
@@ -23027,7 +20037,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -23228,16 +20238,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, binary_SLE)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/001_44_second_score_no_HC/44a_AoU_SLE_1SD_only.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
 
 # ___________2 SD ----------------------------------------------------
 
@@ -23323,14 +20323,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, binary_SLE)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/001_44_second_score_no_HC/44a_AoU_SLE_2SD_only.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
 
 
 
@@ -23360,7 +20352,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt") 
+fread("file") 
 
 # Annotate lymphoid malignancies lower age
 df_lymphoid_malignancies_lower_age <- df %>% 
@@ -23747,16 +20739,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, second_score)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/articles/first_year_phd_pubs/002_first_article/para_julie/Fig3/003_fig3D_UKB_4riks_1p5SD.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
 
 
 
@@ -24034,14 +21016,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, second_score)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/articles/first_year_phd_pubs/002_first_article/para_julie/45a_UKB_4_risks_2SD.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
 
 
 
@@ -24069,7 +21043,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -24515,16 +21489,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration, second_score)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/rstudio/workspace/workspace-bucket/stennio/003_first_article_replication/002_data_for_julie_fig2_code_2p1p2p3/45a_AoU_4_risks_2SD.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
 
 
 
@@ -24550,7 +21514,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -24808,7 +21772,7 @@ library(OptSurvCutR)
 
 
 
-df <- fread("/lustre09/project/6097258/stnfaria/ukb_rare_variants/000_whole_cohort/data/027_first_article_OptSurvCutR/20260514_summary_age_delays_score_LOF_SLE_LM_CH.tsv")  %>% 
+df <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -25010,7 +21974,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -25228,7 +22192,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -25473,7 +22437,7 @@ library(OptSurvCutR)
 
 
 
-df <- fread("/lustre09/project/6097258/stnfaria/ukb_rare_variants/000_whole_cohort/data/027_first_article_OptSurvCutR/20260514_summary_age_delays_score_LOF_SLE_LM_CH.tsv")  %>% 
+df <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -25685,7 +22649,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -25909,7 +22873,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -26154,7 +23118,7 @@ library(OptSurvCutR)
 
 
 
-df <- fread("/lustre09/project/6097258/stnfaria/ukb_rare_variants/000_whole_cohort/data/027_first_article_OptSurvCutR/20260514_summary_age_delays_score_LOF_SLE_LM_CH.tsv")  %>% 
+df <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -26360,7 +23324,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -26581,7 +23545,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -26828,7 +23792,7 @@ library(OptSurvCutR)
 
 
 
-df <- fread("/lustre09/project/6097258/stnfaria/ukb_rare_variants/000_whole_cohort/data/027_first_article_OptSurvCutR/20260514_summary_age_delays_score_LOF_SLE_LM_CH.tsv")  %>% 
+df <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -27031,7 +23995,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -27257,7 +24221,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -27520,7 +24484,7 @@ library(OptSurvCutR)
 
 
 
-df <- fread("/lustre09/project/6097258/stnfaria/ukb_rare_variants/000_whole_cohort/data/027_first_article_OptSurvCutR/20260514_summary_age_delays_score_LOF_SLE_LM_CH.tsv")  %>% 
+df <- fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -27712,109 +24676,6 @@ sbatch $UKBSCRIPTS/2cp_4ml.sh
 
 
 
-# _____________Special task: columns LOF, PRS_SLE, LM, CH, ITP binary, AIHA binary et age at first AIC ------------------------------------------------------------
-# 2025 05 25
-# D’ailleurs c’est pour la semaine prochaine mais je te l’écris là car je serai en clinique:
-#   
-#   Peux-tu m’envoyer les colonnes LOF, PRS_SLE, LM, CH, ITP binary, AIHA binary et age at first AIC pour les patients avec CAI stp? Je vais essayer un truc sur prism
-
-
-# Annotate LM or CH lower age
-df_LM_lower_age <- df_LM_CH_lower_age %>% 
-  mutate(LM_lower_age = pmin(LYMPHOME_lower_age, 
-                             Other_LEUK_lower_age, 
-                             LLC_lower_age,
-                             na.rm = T))
-
-
-df_subset <- df_LM_lower_age %>% 
-  filter(!is.na(CAI_lower_age)) 
-nrow(df_subset)
-
-
-
-
-output <- df_subset %>% 
-  select(WES_500k_LoF_MAF01__Hauck_ITPnHAI, 
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE., 
-         LM_lower_age, 
-         CH_Age_sample, 
-         binary_ITP, 
-         binary_AIHA, 
-         CAI_lower_age,
-  )
-
-
-
-
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260525_UKB_LOF_PRS_SLE_LM_CH_ITP_binary_AIHA_binary_CAI_lower_age_CAI_subset.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
-
-# Write output: table for ROC in prism
-# Annotate LM or CH lower age
-df_LM_lower_age <- df_LM_CH_lower_age %>% 
-  mutate(LM_lower_age = pmin(LYMPHOME_lower_age, 
-                             Other_LEUK_lower_age, 
-                             LLC_lower_age,
-                             na.rm = T))
-
-
-df_subset <- df_LM_lower_age
-nrow(df_subset)
-
-
-
-output <- df_subset %>% 
-  select(WES_500k_LoF_MAF01__Hauck_ITPnHAI, 
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE., 
-         LM_lower_age, 
-         CH_Age_sample, 
-         binary_ITP, 
-         binary_AIHA, 
-         CAI_lower_age,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.,
-         age_end_follow_up,
-         CAI_lower_age,
-         binary_ITP_or_AIHA_indivs
-  ) %>% 
-  mutate(omop_gender_concept_id = ifelse(is.na(omop_gender_concept_id), "", omop_gender_concept_id))
-
-
-
-
-
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/001_UKB_data_for_ROC.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
-
-
 
 # _______AoU replication --------------------
 # Not significant LoF and CH in AoU, probably because of lack of statistical power
@@ -27839,7 +24700,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -28076,1854 +24937,6 @@ print(results, digits = 3)
 
 
 
-# ________________________(legacy) 5.6 PRS SLE and LoF binary summed- LM and CH --------------------
-# PRS SLE stratified using the cutpoint of 2): 3.03 and binarised
-# LoF binarised. Cutpoint: 0.1
-# Annotate sum PRS SLE binarised + LoF binarised
-# Subset to remove CAI before LM or CH
-# Run cumulative incidence
-
-
-
-
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-library(tidyplots)
-library(lubridate)
-library(survival)
-library(survminer)
-library(ggsurvfit)
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         binary_LYMPHOME,
-         binary_Other_LEUK,
-         binary_LLC,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.
-  )
-
-
-# Annotate LM or CH lower age
-df_LM_CH_lower_age <- df %>% 
-  mutate(LM_CH_lower_age = pmin(LYMPHOME_lower_age, 
-                                Other_LEUK_lower_age, 
-                                LLC_lower_age,
-                                CH_Age_sample_lower_age,
-                                na.rm = T))
-
-
-# Indivs with CAI diagnosis
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_LM_CH_lower_age %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - LM_CH_lower_age,
-                                     age_end_follow_up - LM_CH_lower_age))
-
-
-# Convert ages from days to years BEFORE creating variables
-df_follow_up_duration_years <- df_follow_up_duration %>%
-  mutate(
-    
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    LM_CH_lower_age_lower_age_years = LM_CH_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - LM_CH_lower_age_lower_age_years,
-                                      age_end_follow_up_years - LM_CH_lower_age_lower_age_years)
-  )
-
-
-
-# Annotate CAI before LM_CH
-df_CAI_before_LM_CH <- df_follow_up_duration_years %>%
-  mutate(CAI_before_LM_CH_indivs = case_when(
-    CAI_lower_age < LM_CH_lower_age ~ "1",
-    TRUE ~ "0"
-  )) 
-
-
-
-
-# Stratify PRS score
-df_stratified_score <- df_CAI_before_LM_CH %>% 
-  mutate(stratified_score = case_when(
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. <= 3.03 ~ "0",
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. > 3.03 ~"1"
-  ))
-
-
-
-
-# Annotate LOF binary
-df_lof_binaire <- df_stratified_score %>% 
-  mutate(lof_binaire = case_when(
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-  ))
-
-
-
-# Annotate PRS binary + LoF
-df_nouvelle_colonne <- df_lof_binaire %>% 
-  mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-
-
-
-# Subset if needed
-df_subset <- df_nouvelle_colonne %>% 
-  filter(follow_up_duration > 0) %>% 
-  filter(CAI_before_LM_CH_indivs != 1) # Remove indivs with CAI before LM_CH
-
-nrow(df_subset)
-
-
-
-table(df_subset$prs_n_lof)
-
-table(df_subset$WES_500k_LoF_MAF01__Hauck_ITPnHAI)
-
-table(subset(df_subset, stratified_score == "1")$lof_binaire)
-
-
-
-
-
-### Cox model
-
-# Multivariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-    Age.at.recruitment + omop_gender_concept_id  +
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Kaplan-Meier curve (equivalent to Cox model with binary variable)
-fit_km <- survfit(Surv(follow_up_duration_years, binary_ITP_or_AIHA_indivs) ~ prs_n_lof,
-                  data = df_subset)
-
-fit_km
-
-
-
-### Graph formatting
-# Plot without X axis initially
-plot(fit_km, 
-     fun = "event",                # Cumulative incidence (1 - survival)
-     lwd = 2,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "outcome: SLE. T0: CAI lower age. SLE PRS 2 cutpoints. Subset: CAI indivs without primary SLE ",
-     xaxt = "n")                   # Suppresses automatic X axis
-
-# Add manual X axis with 5-year intervals
-max_age <- max(df_subset$follow_up_duration_years, na.rm = TRUE)
-breaks_x <- seq(0, ceiling(max_age/5)*5, by = 5)
-
-axis(side = 1, at = breaks_x, labels = breaks_x)
-
-# Add vertical grid at the breaks
-abline(v = breaks_x, col = "lightgray", lty = 2)
-
-###
-
-
-
-
-
-
-
-
-
-
-# ________________________(legacy) 5.7 PRS SLE and LoF binary summed- LM only --------------------
-# PRS SLE stratified using the cutpoint of 2): 3.03 and binarised
-# LoF binarised. Cutpoints: 0.1
-# Annotate sum PRS SLE binarised + LoF binarised
-# Subset to remove CAI before LM or CH
-# Run cumulative incidence
-
-
-
-
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-library(tidyplots)
-library(lubridate)
-library(survival)
-library(survminer)
-library(ggsurvfit)
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         binary_LYMPHOME,
-         binary_Other_LEUK,
-         binary_LLC,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.
-  )
-
-
-# Annotate LM or CH lower age
-df_LM_lower_age <- df %>% 
-  mutate(LM_lower_age = pmin(LYMPHOME_lower_age, 
-                             Other_LEUK_lower_age, 
-                             LLC_lower_age,
-                             na.rm = T))
-
-
-# Indivs with CAI diagnosis
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_LM_lower_age %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - LM_lower_age,
-                                     age_end_follow_up - LM_lower_age))
-
-
-# Convert ages from days to years BEFORE creating variables
-df_follow_up_duration_years <- df_follow_up_duration %>%
-  mutate(
-    
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    LM_lower_age_lower_age_years = LM_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - LM_lower_age_lower_age_years,
-                                      age_end_follow_up_years - LM_lower_age_lower_age_years)
-  )
-
-
-
-# Annotate CAI before LM_CH
-df_CAI_before_LM <- df_follow_up_duration_years %>%
-  mutate(CAI_before_LM_indivs = case_when(
-    CAI_lower_age < LM_lower_age ~ "1",
-    TRUE ~ "0"
-  )) 
-
-
-
-
-# Stratify PRS score
-df_stratified_score <- df_CAI_before_LM %>% 
-  mutate(stratified_score = case_when(
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. <= 3.03 ~ "0",
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. > 3.03 ~"1"
-  ))
-
-
-
-
-# Annotate LOF binary
-df_lof_binaire <- df_stratified_score %>% 
-  mutate(lof_binaire = case_when(
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-  ))
-
-
-
-# Annotate PRS binary + LoF
-df_nouvelle_colonne <- df_lof_binaire %>% 
-  mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-
-
-
-# Subset if needed
-df_subset <- df_nouvelle_colonne %>% 
-  filter(follow_up_duration > 0) %>% 
-  filter(CAI_before_LM_indivs != 1) # Remove indivs with CAI before LM
-
-nrow(df_subset)
-
-
-
-### Cox model
-
-# Multivariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-    Age.at.recruitment + omop_gender_concept_id  +
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Kaplan-Meier curve (equivalent to Cox model with binary variable)
-fit_km <- survfit(Surv(follow_up_duration_years, binary_ITP_or_AIHA_indivs) ~ prs_n_lof,
-                  data = df_subset)
-
-fit_km
-
-
-
-### Graph formatting
-# Plot without X axis initially
-plot(fit_km, 
-     fun = "event",                # Cumulative incidence (1 - survival)
-     lwd = 2,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "outcome: SLE. T0: CAI lower age. SLE PRS 2 cutpoints. Subset: CAI indivs without primary SLE ",
-     xaxt = "n")                   # Suppresses automatic X axis
-
-# Add manual X axis with 5-year intervals
-max_age <- max(df_subset$follow_up_duration_years, na.rm = TRUE)
-breaks_x <- seq(0, ceiling(max_age/5)*5, by = 5)
-
-axis(side = 1, at = breaks_x, labels = breaks_x)
-
-# Add vertical grid at the breaks
-abline(v = breaks_x, col = "lightgray", lty = 2)
-
-###
-
-
-
-
-
-# Export for Prism
-
-output <- df_subset %>% 
-  select(binary_ITP_or_AIHA_indivs, prs_n_lof, follow_up_duration)
-
-
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/5p7_PRS_SLE_LOF_binary_summed_LM_only.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
-
-
-
-# ________________________(legacy) 5.8 PRS SLE and LoF binary summed- CH only --------------------
-# PRS SLE stratified using the cutpoint of 2): 3.03 and binarised
-# LoF binarised. Cutpoint: 0.1
-# Annotate sum PRS SLE binarised + LoF binarised
-# Subset to remove CAI before CH only
-# Run cumulative incidence
-
-
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-library(tidyplots)
-library(lubridate)
-library(survival)
-library(survminer)
-library(ggsurvfit)
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         binary_LYMPHOME,
-         binary_Other_LEUK,
-         binary_LLC,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.
-  )
-
-
-
-
-# Indivs with CAI diagnosis
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - CH_Age_sample_lower_age,
-                                     age_end_follow_up - CH_Age_sample_lower_age))
-
-
-# Convert ages from days to years BEFORE creating variables
-df_follow_up_duration_years <- df_follow_up_duration %>%
-  mutate(
-    
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    CH_lower_age_lower_age_years = CH_Age_sample_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - CH_lower_age_lower_age_years,
-                                      age_end_follow_up_years - CH_lower_age_lower_age_years)
-  )
-
-
-
-# Annotate CAI before LM_CH
-df_CAI_before_CH <- df_follow_up_duration_years %>%
-  mutate(CAI_before_CH_indivs = case_when(
-    CAI_lower_age < CH_Age_sample_lower_age ~ "1",
-    TRUE ~ "0"
-  )) 
-
-
-
-
-# Stratify PRS score
-df_stratified_score <- df_CAI_before_CH %>% 
-  mutate(stratified_score = case_when(
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. <= 3.03 ~ "0",
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. > 3.03 ~"1"
-  ))
-
-
-
-
-# Annotate LOF binary
-df_lof_binaire <- df_stratified_score %>% 
-  mutate(lof_binaire = case_when(
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-  ))
-
-
-
-# Annotate PRS binary + LoF
-df_nouvelle_colonne <- df_lof_binaire %>% 
-  mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-
-
-
-
-# Subset if needed
-df_subset <- df_nouvelle_colonne %>% 
-  filter(follow_up_duration > 0) %>% 
-  filter(CAI_before_CH_indivs != 1) # Remove indivs with CAI before CH
-
-nrow(df_subset)
-
-
-
-
-### Cox model
-
-# Multivariate
-cox_model <- coxph(
-  
-  Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-    Age.at.recruitment + omop_gender_concept_id  +
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset)
-
-
-summary(cox_model)
-
-
-
-
-
-
-
-
-
-
-# Kaplan-Meier curve (equivalent to Cox model with binary variable)
-fit_km <- survfit(Surv(follow_up_duration_years, binary_ITP_or_AIHA_indivs) ~ prs_n_lof,
-                  data = df_subset)
-
-fit_km
-
-
-
-### Graph formatting
-# Plot without X axis initially
-plot(fit_km, 
-     fun = "event",                # Cumulative incidence (1 - survival)
-     lwd = 2,
-     xlab = "Time of follow-up (years)",
-     ylab = "Cumulative incidence",
-     main = "outcome: SLE. T0: CAI lower age. SLE PRS 2 cutpoints. Subset: CAI indivs without primary SLE ",
-     xaxt = "n")                   # Suppresses automatic X axis
-
-# Add manual X axis with 5-year intervals
-max_age <- max(df_subset$follow_up_duration_years, na.rm = TRUE)
-breaks_x <- seq(0, ceiling(max_age/5)*5, by = 5)
-
-axis(side = 1, at = breaks_x, labels = breaks_x)
-
-# Add vertical grid at the breaks
-abline(v = breaks_x, col = "lightgray", lty = 2)
-
-###
-
-
-
-
-
-# Export for Prism
-
-output <- df_subset %>% 
-  select(binary_ITP_or_AIHA_indivs, prs_n_lof, follow_up_duration)
-
-
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/5p8_PRS_SLE_LOF_binary_summed_CH_only.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
-
-
-
-# ____ (legacy) 5.6 PRS_n_LoF binary summed- LM and CH --------------------
-# Legacy : not used in final results 
-
-
-# PRS SLE stratified using the cutpoint of 2): 3.03 and binarised
-# LoF binarised. Cutpoint: 0.1
-# Annotate sum PRS SLE binarised + LoF binarised
-# Subset to remove CAI before LM or CH
-# Run cumulative incidence
-
-
-
-# Supplemental table 13
-
-# Fig 5B: Section 5.7 1|2 SD SLE  PGS and LoF binary summed- LM only, 1.5 SD
-
-
-library(dplyr)
-library(data.table)
-library(tidyr)
-library(stringr)
-library(readxl)
-library(broom)
-library(tidyplots)
-library(lubridate)
-library(survival)
-library(survminer)
-library(ggsurvfit)
-
-
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
-  select(`Participant.ID`, 
-         
-         # Diagnostics
-         SLE,
-         TPI, 
-         HAI,
-         CH_Age_sample,
-         LYMPHOME,
-         Other_LEUK,
-         LLC,
-         
-         # Binaries
-         binary_CH_Age_sample,
-         binary_ITP_or_AIHA_indivs,
-         binary_AIHA,
-         binary_ITP,
-         binary_SLE,
-         binary_LYMPHOME,
-         binary_Other_LEUK,
-         binary_LLC,
-         
-         # Lower age
-         AIHA_lower_age,
-         TPI_lower_age,
-         CAI_lower_age,
-         SLE_lower_age,
-         LYMPHOME_lower_age,
-         Other_LEUK_lower_age,
-         LLC_lower_age,
-         CH_Age_sample_lower_age,
-         
-         # Survival analysis
-         Time.blood.sample.collected...Instance.0...Array.0,
-         blood_draw_date,
-         formatted_DATE_BIRTH,
-         age_inclusion,
-         date_end_follow_up,
-         age_end_follow_up,
-         span_age_end_follow_up_age_inclusion,
-         
-         # MAF < 0.1%
-         WES_500k_LoF_MAF01__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF01_revel_0.5_count,
-         list_ITPnHAI_maf_MAF01_revel_0.9_count,
-         MAF01_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # MAF < 1%
-         WES_500k_LoF_MAF1__Hauck_ITPnHAI, # LOF only
-         list_ITPnHAI_maf_MAF1_revel_0.5_count,
-         list_ITPnHAI_maf_MAF1_revel_0.9_count,
-         MAF1_LoF_not_CH_or_revel_0.9_ITPnHAI,
-         
-         # Covariates
-         `Age.at.recruitment`,
-         omop_gender_concept_id,
-         Genetic.principal.components...Array.1,
-         Genetic.principal.components...Array.2,
-         Genetic.principal.components...Array.3,
-         Genetic.principal.components...Array.4,
-         Genetic.principal.components...Array.5,
-         Genetic.principal.components...Array.6,
-         Genetic.principal.components...Array.7,
-         Genetic.principal.components...Array.8,
-         Genetic.principal.components...Array.9,
-         Genetic.principal.components...Array.10,
-         Standard.PRS.for.systemic.lupus.erythematosus..SLE.
-  )
-
-
-# Annotate LM or CH lower age
-df_LM_CH_lower_age <- df %>% 
-  mutate(LM_CH_lower_age = pmin(LYMPHOME_lower_age, 
-                                Other_LEUK_lower_age, 
-                                LLC_lower_age,
-                                CH_Age_sample_lower_age,
-                                na.rm = T))
-
-
-
-# Annotate binary LM or CH
-df_binary_LM_CH <- df_LM_CH_lower_age |> 
-  mutate(binary_LM_CH = case_when(
-    !is.na(LM_CH_lower_age) ~ "1",
-    TRUE ~ "0"
-  ))
-
-
-
-
-# Indivs with CAI diagnosis
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_binary_LM_CH %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - LM_CH_lower_age,
-                                     age_end_follow_up - LM_CH_lower_age))
-
-
-# Convert ages from days to years BEFORE creating variables
-df_follow_up_duration_years <- df_follow_up_duration %>%
-  mutate(
-    
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    LM_CH_lower_age_lower_age_years = LM_CH_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - LM_CH_lower_age_lower_age_years,
-                                      age_end_follow_up_years - LM_CH_lower_age_lower_age_years)
-  )
-
-
-
-# Annotate CAI before LM_CH
-df_CAI_before_LM_CH <- df_follow_up_duration_years %>%
-  mutate(CAI_before_LM_CH_indivs = case_when(
-    CAI_lower_age < LM_CH_lower_age ~ "1",
-    TRUE ~ "0"
-  )) 
-
-
-
-# 
-# 
-# # Subset if needed
-# df_subset <- df_CAI_before_LM_CH %>% 
-#   filter(follow_up_duration > 0) %>% 
-#   filter(CAI_before_LM_CH_indivs != 1) # Remove indivs with CAI before LM_CH
-# 
-# nrow(df_subset)
-# 
-# 
-# 
-# 
-# # Calculate SLE PGS mean and SD
-# mean_SLE_PGS <- mean(df_subset$Standard.PRS.for.systemic.lupus.erythematosus..SLE., na.rm = TRUE)
-# sd_SLE_PGS <- sd(df_subset$Standard.PRS.for.systemic.lupus.erythematosus..SLE., na.rm = TRUE)
-# 
-#
-# 
-# ______1 SD --------------------------------------------------------------------
-# 
-# # Stratify PRS score
-# df_stratified_score <- df_subset %>% 
-#   mutate(stratified_score = case_when(
-#     Standard.PRS.for.systemic.lupus.erythematosus..SLE. < (mean_SLE_PGS + 1 * sd_SLE_PGS)  ~ "0",
-#     Standard.PRS.for.systemic.lupus.erythematosus..SLE. >= (mean_SLE_PGS + 1 * sd_SLE_PGS ) ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate LOF binary
-# df_lof_binaire <- df_stratified_score %>% 
-#   mutate(lof_binaire = case_when(
-#     WES_500k_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-#     WES_500k_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate PRS binary + LoF
-# df_nouvelle_colonne <- df_lof_binaire %>% 
-#   mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-# 
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_nouvelle_colonne
-# 
-# 
-# 
-# table(df_subset$prs_n_lof)
-# 
-# table(df_subset$WES_500k_LoF_MAF01__Hauck_ITPnHAI)
-# 
-# table(subset(df_subset, stratified_score == "1")$lof_binaire)
-# 
-# 
-# 
-# 
-# 
-# ### Cox model
-# 
-# # Multivariate
-# cox_model <- coxph(
-#   
-#   Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-#     Age.at.recruitment + omop_gender_concept_id  +
-#     Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-#     Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-#     Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-#     Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-#     Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-#   data=df_subset)
-# 
-# 
-# summary(cox_model)
-# 
-
-
-
-
-### Logistic regression
-
-# Subset if needed
-df_subset <- df_CAI_before_LM_CH %>% 
-  filter(binary_LM_CH == 1) |> 
-  filter(CAI_before_LM_CH_indivs != 1) # Remove indivs with CAI before LM_CH
-
-nrow(df_subset)
-
-
-
-# Calculate SLE PGS mean and SD
-mean_SLE_PGS <- mean(df_subset$Standard.PRS.for.systemic.lupus.erythematosus..SLE., na.rm = TRUE)
-sd_SLE_PGS <- sd(df_subset$Standard.PRS.for.systemic.lupus.erythematosus..SLE., na.rm = TRUE)
-
-
-
-# Stratify PRS score
-df_stratified_score <- df_subset %>% 
-  mutate(stratified_score = case_when(
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. < (mean_SLE_PGS + 1 * sd_SLE_PGS)  ~ "0",
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. >= (mean_SLE_PGS + 1 * sd_SLE_PGS ) ~"1"
-  ))
-
-
-
-# Annotate LOF binary
-df_lof_binaire <- df_stratified_score %>% 
-  mutate(lof_binaire = case_when(
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-  ))
-
-
-
-# Annotate PRS binary + LoF
-df_nouvelle_colonne <- df_lof_binaire %>% 
-  mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-
-
-
-# Subset if needed
-df_subset <- df_nouvelle_colonne
-
-
-
-## Logistic regression
-
-summary(glm(
-  as.factor(binary_ITP_or_AIHA_indivs) ~  prs_n_lof +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-
-model_logistic_regression <- glm(
-  as.factor(binary_ITP_or_AIHA_indivs) ~  prs_n_lof +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-summary_model <- summary(model_logistic_regression)
-
-# Extract coefficients with p-values
-coef_table <- summary_model$coefficients
-
-# View the full table with p-values (exact)
-print(coef_table, digits = 20)
-
-
-
-
-
-
-# ______1.5 SD --------------------------------------------------------------------
-# 
-# # Stratify PRS score
-# df_stratified_score <- df_subset %>% 
-#   mutate(stratified_score = case_when(
-#     Standard.PRS.for.systemic.lupus.erythematosus..SLE. < (mean_SLE_PGS + 1 * sd_SLE_PGS)  ~ "0",
-#     Standard.PRS.for.systemic.lupus.erythematosus..SLE. >= (mean_SLE_PGS + 1 * sd_SLE_PGS ) ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate LOF binary
-# df_lof_binaire <- df_stratified_score %>% 
-#   mutate(lof_binaire = case_when(
-#     WES_500k_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-#     WES_500k_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate PRS binary + LoF
-# df_nouvelle_colonne <- df_lof_binaire %>% 
-#   mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-# 
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_nouvelle_colonne
-# 
-# 
-# 
-# table(df_subset$prs_n_lof)
-# 
-# table(df_subset$WES_500k_LoF_MAF01__Hauck_ITPnHAI)
-# 
-# table(subset(df_subset, stratified_score == "1")$lof_binaire)
-# 
-# 
-# 
-# 
-# 
-# ### Cox model
-# 
-# # Multivariate
-# cox_model <- coxph(
-#   
-#   Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-#     Age.at.recruitment + omop_gender_concept_id  +
-#     Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-#     Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-#     Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-#     Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-#     Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-#   data=df_subset)
-# 
-# 
-# summary(cox_model)
-# 
-
-
-
-
-### Logistic regression
-
-# Subset if needed
-df_subset <- df_CAI_before_LM_CH %>% 
-  filter(binary_LM_CH == 1) |> 
-  filter(CAI_before_LM_CH_indivs != 1) # Remove indivs with CAI before LM_CH
-
-nrow(df_subset)
-
-
-
-# Calculate SLE PGS mean and SD
-mean_SLE_PGS <- mean(df_subset$Standard.PRS.for.systemic.lupus.erythematosus..SLE., na.rm = TRUE)
-sd_SLE_PGS <- sd(df_subset$Standard.PRS.for.systemic.lupus.erythematosus..SLE., na.rm = TRUE)
-
-
-
-# Stratify PRS score
-df_stratified_score <- df_subset %>% 
-  mutate(stratified_score = case_when(
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. < (mean_SLE_PGS + 1.5 * sd_SLE_PGS)  ~ "0",
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. >= (mean_SLE_PGS + 1.5 * sd_SLE_PGS ) ~"1"
-  ))
-
-
-
-# Annotate LOF binary
-df_lof_binaire <- df_stratified_score %>% 
-  mutate(lof_binaire = case_when(
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-  ))
-
-
-
-# Annotate PRS binary + LoF
-df_nouvelle_colonne <- df_lof_binaire %>% 
-  mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-
-
-
-# Subset if needed
-df_subset <- df_nouvelle_colonne
-
-
-
-## Logistic regression
-
-summary(glm(
-  as.factor(binary_ITP_or_AIHA_indivs) ~  prs_n_lof +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-
-model_logistic_regression <- glm(
-  as.factor(binary_ITP_or_AIHA_indivs) ~  prs_n_lof +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-summary_model <- summary(model_logistic_regression)
-
-# Extract coefficients with p-values
-coef_table <- summary_model$coefficients
-
-# View the full table with p-values (exact)
-print(coef_table, digits = 20)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# ______2 SD --------------------------------------------------------------------
-
-# 
-# ### Cox model
-# 
-# 
-# # Subset if needed
-# df_subset <- df_CAI_before_LM_CH %>% 
-#   filter(follow_up_duration > 0) %>% 
-#   filter(CAI_before_LM_CH_indivs != 1) # Remove indivs with CAI before LM_CH
-# 
-# nrow(df_subset)
-# 
-# 
-# 
-# 
-# # Calculate SLE PGS mean and SD
-# mean_SLE_PGS <- mean(df_subset$Standard.PRS.for.systemic.lupus.erythematosus..SLE., na.rm = TRUE)
-# sd_SLE_PGS <- sd(df_subset$Standard.PRS.for.systemic.lupus.erythematosus..SLE., na.rm = TRUE)
-# 
-# 
-# 
-# # Stratify PRS score
-# df_stratified_score <- df_subset %>% 
-#   mutate(stratified_score = case_when(
-#     Standard.PRS.for.systemic.lupus.erythematosus..SLE. < (mean_SLE_PGS + 2 * sd_SLE_PGS)  ~ "0",
-#     Standard.PRS.for.systemic.lupus.erythematosus..SLE. >= (mean_SLE_PGS + 2 * sd_SLE_PGS ) ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate LOF binary
-# df_lof_binaire <- df_stratified_score %>% 
-#   mutate(lof_binaire = case_when(
-#     WES_500k_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-#     WES_500k_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate PRS binary + LoF
-# df_nouvelle_colonne <- df_lof_binaire %>% 
-#   mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-# 
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_nouvelle_colonne
-# 
-# 
-# 
-# table(df_subset$prs_n_lof)
-# 
-# table(df_subset$WES_500k_LoF_MAF01__Hauck_ITPnHAI)
-# 
-# table(subset(df_subset, stratified_score == "1")$lof_binaire)
-# 
-# 
-# 
-# 
-# # Multivariate
-# cox_model <- coxph(
-#   
-#   Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-#     Age.at.recruitment + omop_gender_concept_id  +
-#     Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-#     Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-#     Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-#     Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-#     Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-#   data=df_subset)
-# 
-# 
-# summary(cox_model)
-# 
-
-
-
-
-
-
-
-
-### Logistic regression
-
-# Subset if needed
-df_subset <- df_CAI_before_LM_CH %>% 
-  filter(binary_LM_CH == 1) |> 
-  filter(CAI_before_LM_CH_indivs != 1) # Remove indivs with CAI before LM_CH
-
-nrow(df_subset)
-
-
-
-# Calculate SLE PGS mean and SD
-mean_SLE_PGS <- mean(df_subset$Standard.PRS.for.systemic.lupus.erythematosus..SLE., na.rm = TRUE)
-sd_SLE_PGS <- sd(df_subset$Standard.PRS.for.systemic.lupus.erythematosus..SLE., na.rm = TRUE)
-
-
-
-# Stratify PRS score
-df_stratified_score <- df_subset %>% 
-  mutate(stratified_score = case_when(
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. < (mean_SLE_PGS + 2 * sd_SLE_PGS)  ~ "0",
-    Standard.PRS.for.systemic.lupus.erythematosus..SLE. >= (mean_SLE_PGS + 2 * sd_SLE_PGS ) ~"1"
-  ))
-
-
-
-# Annotate LOF binary
-df_lof_binaire <- df_stratified_score %>% 
-  mutate(lof_binaire = case_when(
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-    WES_500k_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-  ))
-
-
-
-# Annotate PRS binary + LoF
-df_nouvelle_colonne <- df_lof_binaire %>% 
-  mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-
-
-
-# Subset if needed
-df_subset <- df_nouvelle_colonne
-
-
-
-## Logistic regression
-
-summary(glm(
-  as.factor(binary_ITP_or_AIHA_indivs) ~  prs_n_lof +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-
-model_logistic_regression <- glm(
-  as.factor(binary_ITP_or_AIHA_indivs) ~  prs_n_lof +
-    omop_gender_concept_id +
-    age_end_follow_up  + 
-    Genetic.principal.components...Array.1 + Genetic.principal.components...Array.2 + 
-    Genetic.principal.components...Array.3 + Genetic.principal.components...Array.4 + 
-    Genetic.principal.components...Array.5 + Genetic.principal.components...Array.6 + 
-    Genetic.principal.components...Array.7 + Genetic.principal.components...Array.8 + 
-    Genetic.principal.components...Array.9 + Genetic.principal.components...Array.10, 
-  data=df_subset, family = binomial)
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-summary_model <- summary(model_logistic_regression)
-
-# Extract coefficients with p-values
-coef_table <- summary_model$coefficients
-
-# View the full table with p-values (exact)
-print(coef_table, digits = 20)
-
-
-
-
-
-
-
-
-
-
-# __________ (legacy) AoU replication --------------------
-# Legacy: not used because results are not significant in AoU v8
-
-required_packages <- c("data.table", 
-                       "dplyr", 
-                       "tidyr", 
-                       "stringr", 
-                       "readxl", 
-                       "broom",
-                       "lubridate",
-                       "survival",
-                       "ggsurvfit")
-
-for (pkg in required_packages) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, dependencies = TRUE)
-  }
-  library(pkg, character.only = TRUE)
-}
-
-
-
-
-
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
-  select(
-    # General data
-    person_id,
-    date_end_follow_up,
-    age_end_follow_up,
-    sex_genetic,
-    year_of_birth,
-    #    first_condition_date,
-    #    first_condition_year,
-    first_condition_age,
-    biosample_collection_age,
-    span_age_end_follow_up_age_inclusion,
-    Age.at.recruitment,
-    
-    # Diagnostics
-    TPI,
-    HAI,
-    SLE,
-    LLC,
-    LYMPHOME,
-    Other_LEUK,
-    CH_Age_sample,
-    
-    # Binaries 
-    binary_ITP_or_AIHA_indivs,
-    binary_AIHA,
-    binary_ITP,
-    binary_SLE,
-    binary_LLC,
-    binary_LYMPHOME,
-    binary_Other_LEUK,
-    binary_CH_Age_sample,
-    
-    # Lower age
-    AIHA_lower_age,
-    TPI_lower_age,
-    CAI_lower_age,
-    SLE_lower_age,
-    LYMPHOME_lower_age,
-    Other_LEUK_lower_age,
-    LLC_lower_age,
-    CH_Age_sample_lower_age,
-    
-    # Covariates
-    AoU_LoF_MAF01__Hauck_ITPnHAI,
-    PGS000196,
-    PGS004917,
-    PC1,
-    PC2,
-    PC3,
-    PC4,
-    PC5,
-    PC6,
-    PC7,
-    PC8,
-    PC9,
-    PC10
-  ) 
-
-
-
-
-
-# Annotate LM or CH lower age
-df_LM_CH_lower_age <- df %>% 
-  mutate(LM_CH_lower_age = pmin(LYMPHOME_lower_age, 
-                                Other_LEUK_lower_age, 
-                                LLC_lower_age,
-                                CH_Age_sample_lower_age,
-                                na.rm = T))
-
-
-
-# Annotate binary LM or CH
-df_binary_LM_CH <- df_LM_CH_lower_age |> 
-  mutate(binary_LM_CH = case_when(
-    !is.na(LM_CH_lower_age) ~ "1",
-    TRUE ~ "0"
-  ))
-
-
-
-
-# Indivs with CAI diagnosis
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_binary_LM_CH %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - LM_CH_lower_age,
-                                     age_end_follow_up - LM_CH_lower_age))
-
-
-# Convert ages from days to years BEFORE creating variables
-df_follow_up_duration_years <- df_follow_up_duration %>%
-  mutate(
-    
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    LM_CH_lower_age_lower_age_years = LM_CH_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - LM_CH_lower_age_lower_age_years,
-                                      age_end_follow_up_years - LM_CH_lower_age_lower_age_years)
-  )
-
-
-
-# Annotate CAI before LM_CH
-df_CAI_before_LM_CH <- df_follow_up_duration_years %>%
-  mutate(CAI_before_LM_CH_indivs = case_when(
-    CAI_lower_age < LM_CH_lower_age ~ "1",
-    TRUE ~ "0"
-  )) 
-
-
-
-
-
-
-
-# _____________1 SD --------------------------------------------------------------------
-
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_CAI_before_LM_CH %>% 
-#   filter(follow_up_duration > 0) %>% 
-#   filter(CAI_before_LM_CH_indivs != 1) # Remove indivs with CAI before LM_CH
-# 
-# nrow(df_subset)
-# 
-# 
-# 
-# 
-# # Calculate SLE PGS mean and SD
-# mean_SLE_PGS <- mean(df_subset$PGS004917, na.rm = TRUE)
-# sd_SLE_PGS <- sd(df_subset$PGS004917, na.rm = TRUE)
-# 
-# # Stratify PRS score
-# df_stratified_score <- df_subset %>% 
-#   mutate(stratified_score = case_when(
-#     PGS004917 < (mean_SLE_PGS + 1 * sd_SLE_PGS)  ~ "0",
-#     PGS004917 >= (mean_SLE_PGS + 1 * sd_SLE_PGS ) ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate LOF binary
-# df_lof_binaire <- df_stratified_score %>% 
-#   mutate(lof_binaire = case_when(
-#     AoU_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-#     AoU_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate PRS binary + LoF
-# df_nouvelle_colonne <- df_lof_binaire %>% 
-#   mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-# 
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_nouvelle_colonne
-# 
-# 
-# 
-# 
-# ### Cox model
-# 
-# # Multivariate
-# cox_model <- coxph(
-#   
-#   Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-#     Age.at.recruitment + sex_genetic + 
-#     PC1 +
-#     PC2 +
-#     PC3 +
-#     PC4 +
-#     PC5 +
-#     PC6 +
-#     PC7 +
-#     PC8 +
-#     PC9 +
-#     PC10, 
-#   data=df_subset)
-# 
-# 
-# summary(cox_model)
-# 
-# 
-
-
-# _____________2 SD --------------------------------------------------------------------
-# 
-# 
-# 
-# ### Cox model
-# 
-# 
-# # Stratify PRS score
-# df_stratified_score <- df_subset %>% 
-#   mutate(stratified_score = case_when(
-#     PGS004917 < (mean_SLE_PGS + 2 * sd_SLE_PGS)  ~ "0",
-#     PGS004917 >= (mean_SLE_PGS + 2 * sd_SLE_PGS ) ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate LOF binary
-# df_lof_binaire <- df_stratified_score %>% 
-#   mutate(lof_binaire = case_when(
-#     AoU_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-#     AoU_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate PRS binary + LoF
-# df_nouvelle_colonne <- df_lof_binaire %>% 
-#   mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-# 
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_nouvelle_colonne
-# 
-# 
-# 
-# 
-# # Multivariate
-# cox_model <- coxph(
-#   
-#   Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-#     Age.at.recruitment + sex_genetic + 
-#     PC1 +
-#     PC2 +
-#     PC3 +
-#     PC4 +
-#     PC5 +
-#     PC6 +
-#     PC7 +
-#     PC8 +
-#     PC9 +
-#     PC10, 
-#   data=df_subset)
-# 
-# 
-# summary(cox_model)
-# 
-# 
-
-
-
-
-
-
-### Logistic regression
-
-# Subset if needed
-df_subset <- df_CAI_before_LM_CH %>%
-  filter(binary_LM_CH == 1) %>%
-  filter(CAI_before_LM_CH_indivs != 1) # Remove indivs with CAI before LM_CH
-
-nrow(df_subset)
-
-
-
-
-# Calculate SLE PGS mean and SD
-mean_SLE_PGS <- mean(df_subset$PGS004917, na.rm = TRUE)
-sd_SLE_PGS <- sd(df_subset$PGS004917, na.rm = TRUE)
-
-
-
-
-# Stratify PRS score
-df_stratified_score <- df_subset %>% 
-  mutate(stratified_score = case_when(
-    PGS004917 < (mean_SLE_PGS + 2 * sd_SLE_PGS)  ~ "0",
-    PGS004917 >= (mean_SLE_PGS + 2 * sd_SLE_PGS ) ~"1"
-  ))
-
-
-
-# Annotate LOF binary
-df_lof_binaire <- df_stratified_score %>% 
-  mutate(lof_binaire = case_when(
-    AoU_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-    AoU_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-  ))
-
-
-
-# Annotate PRS binary + LoF
-df_nouvelle_colonne <- df_lof_binaire %>% 
-  mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-
-
-
-
-# Subset if needed
-df_subset <- df_nouvelle_colonne
-
-
-
-
-summary(glm(
-  binary_ITP_or_AIHA_indivs ~  prs_n_lof +
-    age_end_follow_up +
-    sex_genetic +
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-model_logistic_regression <- glm(
-  binary_ITP_or_AIHA_indivs ~  prs_n_lof +
-    age_end_follow_up +
-    sex_genetic +
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-
-
-
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-summary_model <- summary(model_logistic_regression)
-
-# Extract coefficients with p-values
-coef_table <- summary_model$coefficients
-
-# View the full table with p-values (exact)
-print(coef_table, digits = 20)
-
-
-
-
-
-
-
-
-
-
 
 
 # ____5.7 1|2 SD SLE  PGS and LoF binary summed- LM only --------------------
@@ -29949,7 +24962,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -30560,17 +25573,6 @@ output <- df_subset %>%
   select(binary_ITP_or_AIHA_indivs, follow_up_duration_years, prs_n_lof)
 
 
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/articles/first_year_phd_pubs/002_first_article/para_julie/Fig3/004_fig5B_UKB_PRSandLoF_1p5SD.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
-
-
 
 
 
@@ -30786,425 +25788,6 @@ summary(cox_model)
 
 
 
-# __________ (legacy) AoU replication --------------------
-
-
-required_packages <- c("data.table", 
-                       "dplyr", 
-                       "tidyr", 
-                       "stringr", 
-                       "readxl", 
-                       "broom",
-                       "lubridate",
-                       "survival",
-                       "ggsurvfit")
-
-for (pkg in required_packages) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, dependencies = TRUE)
-  }
-  library(pkg, character.only = TRUE)
-}
-
-
-
-
-
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
-  select(
-    # General data
-    person_id,
-    date_end_follow_up,
-    age_end_follow_up,
-    sex_genetic,
-    year_of_birth,
-    #    first_condition_date,
-    #    first_condition_year,
-    first_condition_age,
-    biosample_collection_age,
-    span_age_end_follow_up_age_inclusion,
-    Age.at.recruitment,
-    
-    # Diagnostics
-    TPI,
-    HAI,
-    SLE,
-    LLC,
-    LYMPHOME,
-    Other_LEUK,
-    CH_Age_sample,
-    
-    # Binaries 
-    binary_ITP_or_AIHA_indivs,
-    binary_AIHA,
-    binary_ITP,
-    binary_SLE,
-    binary_LLC,
-    binary_LYMPHOME,
-    binary_Other_LEUK,
-    binary_CH_Age_sample,
-    
-    # Lower age
-    AIHA_lower_age,
-    TPI_lower_age,
-    CAI_lower_age,
-    SLE_lower_age,
-    LYMPHOME_lower_age,
-    Other_LEUK_lower_age,
-    LLC_lower_age,
-    CH_Age_sample_lower_age,
-    
-    # Covariates
-    AoU_LoF_MAF01__Hauck_ITPnHAI,
-    PGS000196,
-    PGS004917,
-    PC1,
-    PC2,
-    PC3,
-    PC4,
-    PC5,
-    PC6,
-    PC7,
-    PC8,
-    PC9,
-    PC10
-  ) 
-
-
-
-
-# Annotate LM lower age
-df_LM_lower_age <- df %>% 
-  mutate(LM_lower_age = pmin(LYMPHOME_lower_age, 
-                             Other_LEUK_lower_age, 
-                             LLC_lower_age,
-                             na.rm = T))
-
-
-# Annotate binary LM or CH
-df_binary_LM <- df_LM_lower_age |> 
-  mutate(binary_LM = case_when(
-    !is.na(LM_lower_age) ~ "1",
-    TRUE ~ "0"
-  ))
-
-
-
-# Indivs with CAI diagnosis
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df_binary_LM %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - LM_lower_age,
-                                     age_end_follow_up - LM_lower_age))
-
-
-# Convert ages from days to years BEFORE creating variables
-df_follow_up_duration_years <- df_follow_up_duration %>%
-  mutate(
-    
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    LM_lower_age_lower_age_years = LM_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - LM_lower_age_lower_age_years,
-                                      age_end_follow_up_years - LM_lower_age_lower_age_years)
-  )
-
-
-
-# Annotate CAI before LM
-df_CAI_before_LM <- df_follow_up_duration_years %>%
-  mutate(CAI_before_LM_indivs = case_when(
-    CAI_lower_age < LM_lower_age ~ "1",
-    TRUE ~ "0"
-  )) 
-
-
-
-
-
-
-# _____________1 SD --------------------------------------------------------------------
-
-# 
-# # Subset if needed
-# df_subset <- df_CAI_before_LM %>% 
-#   filter(follow_up_duration > 0) %>% 
-#   filter(CAI_before_LM_indivs != 1) # Remove indivs with CAI before LM
-# 
-# nrow(df_subset)
-# 
-# 
-# 
-# 
-# # Calculate SLE PGS mean and SD
-# mean_SLE_PGS <- mean(df_subset$PGS004917, na.rm = TRUE)
-# sd_SLE_PGS <- sd(df_subset$PGS004917, na.rm = TRUE)
-# 
-# 
-# 
-
-# # Stratify PRS score
-# df_stratified_score <- df_subset %>% 
-#   mutate(stratified_score = case_when(
-#     PGS004917 < (mean_SLE_PGS + 1 * sd_SLE_PGS)  ~ "0",
-#     PGS004917 >= (mean_SLE_PGS + 1 * sd_SLE_PGS ) ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate LOF binary
-# df_lof_binaire <- df_stratified_score %>% 
-#   mutate(lof_binaire = case_when(
-#     AoU_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-#     AoU_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate PRS binary + LoF
-# df_nouvelle_colonne <- df_lof_binaire %>% 
-#   mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-# 
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_nouvelle_colonne
-# 
-# 
-# 
-# 
-# 
-# ### Cox model
-# 
-# # Multivariate
-# cox_model <- coxph(
-#   
-#   Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-#     Age.at.recruitment + sex_genetic + 
-#     PC1 +
-#     PC2 +
-#     PC3 +
-#     PC4 +
-#     PC5 +
-#     PC6 +
-#     PC7 +
-#     PC8 +
-#     PC9 +
-#     PC10, 
-#   data=df_subset)
-# 
-# 
-# summary(cox_model)
-# 
-
-
-
-
-
-# _____________2 SD --------------------------------------------------------------------
-
-# 
-# 
-# ### Cox model
-# 
-# # Subset if needed
-# df_subset <- df_CAI_before_LM %>% 
-#   filter(binary_LM == 1) %>% 
-#   filter(follow_up_duration > 0) %>%
-#   filter(CAI_before_LM_indivs != 1) # Remove indivs with CAI before LM
-# 
-# nrow(df_subset)
-# 
-# 
-# 
-# 
-# # Calculate SLE PGS mean and SD
-# mean_SLE_PGS <- mean(df_subset$PGS004917, na.rm = TRUE)
-# sd_SLE_PGS <- sd(df_subset$PGS004917, na.rm = TRUE)
-# 
-# 
-# 
-# 
-# # Stratify PRS score
-# df_stratified_score <- df_subset %>% 
-#   mutate(stratified_score = case_when(
-#     PGS004917 < (mean_SLE_PGS + 2 * sd_SLE_PGS)  ~ "0",
-#     PGS004917 >= (mean_SLE_PGS + 2 * sd_SLE_PGS ) ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate LOF binary
-# df_lof_binaire <- df_stratified_score %>% 
-#   mutate(lof_binaire = case_when(
-#     AoU_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-#     AoU_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate PRS binary + LoF
-# df_nouvelle_colonne <- df_lof_binaire %>% 
-#   mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-# 
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_nouvelle_colonne
-# 
-# 
-# 
-# 
-# 
-# 
-# # Multivariate
-# cox_model <- coxph(
-#   
-#   Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-#     Age.at.recruitment + sex_genetic + 
-#     PC1 +
-#     PC2 +
-#     PC3 +
-#     PC4 +
-#     PC5 +
-#     PC6 +
-#     PC7 +
-#     PC8 +
-#     PC9 +
-#     PC10, 
-#   data=df_subset)
-# 
-# 
-# summary(cox_model)
-
-
-
-
-
-### Logistic regression
-
-
-# Subset if needed
-df_subset <- df_CAI_before_LM %>% 
-  filter(binary_LM == 1) %>% 
-  filter(CAI_before_LM_indivs != 1) # Remove indivs with CAI before LM
-
-nrow(df_subset)
-
-
-
-
-# Calculate SLE PGS mean and SD
-mean_SLE_PGS <- mean(df_subset$PGS004917, na.rm = TRUE)
-sd_SLE_PGS <- sd(df_subset$PGS004917, na.rm = TRUE)
-
-
-
-
-# Stratify PRS score
-df_stratified_score <- df_subset %>% 
-  mutate(stratified_score = case_when(
-    PGS004917 < (mean_SLE_PGS + 2 * sd_SLE_PGS)  ~ "0",
-    PGS004917 >= (mean_SLE_PGS + 2 * sd_SLE_PGS ) ~"1"
-  ))
-
-
-
-# Annotate LOF binary
-df_lof_binaire <- df_stratified_score %>% 
-  mutate(lof_binaire = case_when(
-    AoU_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-    AoU_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-  ))
-
-
-
-# Annotate PRS binary + LoF
-df_nouvelle_colonne <- df_lof_binaire %>% 
-  mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-
-
-
-
-# Subset if needed
-df_subset <- df_nouvelle_colonne
-
-
-
-
-### Logistic regression
-
-summary(glm(
-  binary_ITP_or_AIHA_indivs ~  prs_n_lof +
-    age_end_follow_up +
-    sex_genetic +
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-model_logistic_regression <- glm(
-  binary_ITP_or_AIHA_indivs ~  prs_n_lof +
-    age_end_follow_up +
-    sex_genetic +
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-
-
-
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-summary_model <- summary(model_logistic_regression)
-
-# Extract coefficients with p-values
-coef_table <- summary_model$coefficients
-
-# View the full table with p-values (exact)
-print(coef_table, digits = 20)
-
-
-
-
-
-
-
 
 
 
@@ -31232,7 +25815,7 @@ library(survminer)
 library(ggsurvfit)
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -31407,17 +25990,6 @@ summary(cox_model)
 output <- df_subset %>% 
   mutate(follow_up_duration_years = follow_up_duration / 365.25) |> 
   select(binary_ITP_or_AIHA_indivs, follow_up_duration_years, lof_binaire)
-
-
-# Write output
-print('writing final table')
-write.table(output,
-            file = "/home/stn/Documents/GitHub/Doc/articles/first_year_phd_pubs/002_first_article/para_julie/Fig5B_high_risk_lof_only.tsv" ,
-            sep = "\t", row.names = F, col.names = T , quote = F)
-
-print('final table written')
-
-
 
 
 
@@ -32466,407 +27038,9 @@ print(coef_table, digits = 20)
 
 
 
-# __________ (legacy) AoU replication --------------------
-
-
-required_packages <- c("data.table", 
-                       "dplyr", 
-                       "tidyr", 
-                       "stringr", 
-                       "readxl", 
-                       "broom",
-                       "lubridate",
-                       "survival",
-                       "ggsurvfit")
-
-for (pkg in required_packages) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, dependencies = TRUE)
-  }
-  library(pkg, character.only = TRUE)
-}
-
-
-
-
-
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
-  select(
-    # General data
-    person_id,
-    date_end_follow_up,
-    age_end_follow_up,
-    sex_genetic,
-    year_of_birth,
-    #    first_condition_date,
-    #    first_condition_year,
-    first_condition_age,
-    biosample_collection_age,
-    span_age_end_follow_up_age_inclusion,
-    Age.at.recruitment,
-    
-    # Diagnostics
-    TPI,
-    HAI,
-    SLE,
-    LLC,
-    LYMPHOME,
-    Other_LEUK,
-    CH_Age_sample,
-    
-    # Binaries 
-    binary_ITP_or_AIHA_indivs,
-    binary_AIHA,
-    binary_ITP,
-    binary_SLE,
-    binary_LLC,
-    binary_LYMPHOME,
-    binary_Other_LEUK,
-    binary_CH_Age_sample,
-    
-    # Lower age
-    AIHA_lower_age,
-    TPI_lower_age,
-    CAI_lower_age,
-    SLE_lower_age,
-    LYMPHOME_lower_age,
-    Other_LEUK_lower_age,
-    LLC_lower_age,
-    CH_Age_sample_lower_age,
-    
-    # Covariates
-    AoU_LoF_MAF01__Hauck_ITPnHAI,
-    PGS000196,
-    PGS004917,
-    PC1,
-    PC2,
-    PC3,
-    PC4,
-    PC5,
-    PC6,
-    PC7,
-    PC8,
-    PC9,
-    PC10
-  ) 
-
-
-
-
-
-
-# Indivs with CAI diagnosis
-# Annotate follow-up durations into a single column
-df_follow_up_duration <- df %>% 
-  mutate(follow_up_duration = ifelse(binary_ITP_or_AIHA_indivs == 1, 
-                                     CAI_lower_age - CH_Age_sample_lower_age,
-                                     age_end_follow_up - CH_Age_sample_lower_age))
-
-
-# Convert ages from days to years BEFORE creating variables
-df_follow_up_duration_years <- df_follow_up_duration %>%
-  mutate(
-    
-    # Convert ages from days to years
-    CAI_lower_age_years = CAI_lower_age / 365.25,
-    CH_lower_age_lower_age_years = CH_Age_sample_lower_age / 365.25,
-    age_end_follow_up_years = age_end_follow_up / 365.25,
-    
-    follow_up_duration_years = ifelse(binary_ITP_or_AIHA_indivs == 1,
-                                      CAI_lower_age_years - CH_lower_age_lower_age_years,
-                                      age_end_follow_up_years - CH_lower_age_lower_age_years)
-  )
-
-
-
-# Annotate CAI before CH
-df_CAI_before_CH <- df_follow_up_duration_years %>%
-  mutate(CAI_before_CH_indivs = case_when(
-    CAI_lower_age < CH_Age_sample_lower_age ~ "1",
-    TRUE ~ "0"
-  )) 
-
-
-
-
-
-
-
-# _____________1 SD --------------------------------------------------------------------
-
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_CAI_before_CH %>% 
-#   filter(follow_up_duration > 0) %>% 
-#   binary_CH_Age_sample |> 
-#   filter(CAI_before_CH_indivs != 1) # Remove indivs with CAI before CH
-# 
-# nrow(df_subset)
-# 
-# 
-# 
-# # Calculate SLE PGS mean and SD
-# mean_SLE_PGS <- mean(df_subset$PGS004917, na.rm = TRUE)
-# sd_SLE_PGS <- sd(df_subset$PGS004917, na.rm = TRUE)
-# 
-# 
-# # Stratify PRS score
-# df_stratified_score <- df_subset %>% 
-#   mutate(stratified_score = case_when(
-#     PGS004917 < (mean_SLE_PGS + 1 * sd_SLE_PGS)  ~ "0",
-#     PGS004917 >= (mean_SLE_PGS + 1 * sd_SLE_PGS ) ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate LOF binary
-# df_lof_binaire <- df_stratified_score %>% 
-#   mutate(lof_binaire = case_when(
-#     AoU_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-#     AoU_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate PRS binary + LoF
-# df_nouvelle_colonne <- df_lof_binaire %>% 
-#   mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-# 
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_nouvelle_colonne
-# 
-# 
-# 
-# ### Cox model
-# 
-# # Multivariate
-# cox_model <- coxph(
-#   
-#   Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-#     Age.at.recruitment + sex_genetic + 
-#     PC1 +
-#     PC2 +
-#     PC3 +
-#     PC4 +
-#     PC5 +
-#     PC6 +
-#     PC7 +
-#     PC8 +
-#     PC9 +
-#     PC10, 
-#   data=df_subset)
-# 
-# 
-# summary(cox_model)
-# 
-
-
-# _____________2 SD --------------------------------------------------------------------
-
-# 
-# ### Cox model
-# 
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_CAI_before_CH %>% 
-#   filter(follow_up_duration > 0) %>% 
-#   binary_CH_Age_sample |> 
-#   filter(CAI_before_CH_indivs != 1) # Remove indivs with CAI before CH
-# 
-# nrow(df_subset)
-# 
-# 
-# 
-# # Calculate SLE PGS mean and SD
-# mean_SLE_PGS <- mean(df_subset$PGS004917, na.rm = TRUE)
-# sd_SLE_PGS <- sd(df_subset$PGS004917, na.rm = TRUE)
-# 
-# 
-# # Stratify PRS score
-# df_stratified_score <- df_subset %>% 
-#   mutate(stratified_score = case_when(
-#     PGS004917 < (mean_SLE_PGS + 2 * sd_SLE_PGS)  ~ "0",
-#     PGS004917 >= (mean_SLE_PGS + 2 * sd_SLE_PGS ) ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate LOF binary
-# df_lof_binaire <- df_stratified_score %>% 
-#   mutate(lof_binaire = case_when(
-#     AoU_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-#     AoU_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-#   ))
-# 
-# 
-# 
-# # Annotate PRS binary + LoF
-# df_nouvelle_colonne <- df_lof_binaire %>% 
-#   mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-# 
-# 
-# 
-# 
-# # Subset if needed
-# df_subset <- df_nouvelle_colonne
-# 
-# 
-# 
-# 
-# 
-# # Multivariate
-# cox_model <- coxph(
-#   
-#   Surv(follow_up_duration, binary_ITP_or_AIHA_indivs) ~ prs_n_lof +
-#     Age.at.recruitment + sex_genetic + 
-#     PC1 +
-#     PC2 +
-#     PC3 +
-#     PC4 +
-#     PC5 +
-#     PC6 +
-#     PC7 +
-#     PC8 +
-#     PC9 +
-#     PC10, 
-#   data=df_subset)
-# 
-# 
-# summary(cox_model)
-# 
-# 
-# 
-
-
-
-
-
-### Logistic regression
-
-# Subset if needed
-df_subset <- df_CAI_before_CH %>% 
-  filter(binary_CH_Age_sample == 1) |> 
-  filter(CAI_before_CH_indivs != 1) # Remove indivs with CAI before CH
-
-nrow(df_subset)
-
-
-
-# Calculate SLE PGS mean and SD
-mean_SLE_PGS <- mean(df_subset$PGS004917, na.rm = TRUE)
-sd_SLE_PGS <- sd(df_subset$PGS004917, na.rm = TRUE)
-
-
-# Stratify PRS score
-df_stratified_score <- df_subset %>% 
-  mutate(stratified_score = case_when(
-    PGS004917 < (mean_SLE_PGS + 2 * sd_SLE_PGS)  ~ "0",
-    PGS004917 >= (mean_SLE_PGS + 2 * sd_SLE_PGS ) ~"1"
-  ))
-
-
-
-# Annotate LOF binary
-df_lof_binaire <- df_stratified_score %>% 
-  mutate(lof_binaire = case_when(
-    AoU_LoF_MAF01__Hauck_ITPnHAI <= 0.1 ~ "0",
-    AoU_LoF_MAF01__Hauck_ITPnHAI > 0.1 ~"1"
-  ))
-
-
-
-# Annotate PRS binary + LoF
-df_nouvelle_colonne <- df_lof_binaire %>% 
-  mutate(prs_n_lof = as.numeric(lof_binaire) + as.numeric(stratified_score))
-
-
-
-
-# Subset if needed
-df_subset <- df_nouvelle_colonne
-
-
-
-
-
-### Logistic regression
-
-summary(glm(
-  binary_ITP_or_AIHA_indivs ~  prs_n_lof +
-    age_end_follow_up +
-    sex_genetic +
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-model_logistic_regression <- glm(
-  binary_ITP_or_AIHA_indivs ~  prs_n_lof +
-    age_end_follow_up +
-    sex_genetic +
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-
-
-
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-summary_model <- summary(model_logistic_regression)
-
-# Extract coefficients with p-values
-coef_table <- summary_model$coefficients
-
-# View the full table with p-values (exact)
-print(coef_table, digits = 20)
-
-
-
-
-
 
 
 # ___6) AR analysis ---------------------------------------------------------
-# L’idée est donc de refaire l’analyse (régression logistique) CAI ~ LOF et covariables 
-# mais en ne considérant que les gènes de la liste Hauck ITP/AHAI qui sont autosomal récessifs (AR). 
 
 
 # From the 59 genes associated with ITP or AIHA in the dataset, 39 (66%) are AR, 20 are not AR 
@@ -32907,7 +27081,7 @@ library(ggsurvfit)
 
 ### Load data
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -32975,7 +27149,7 @@ df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/tr
 
 
 
-df_inheritance <- fread("/home/stn/Documents/GitHub/Doc/analysis/genes_lists/IUIS_inheritance_curated_formatted.tsv")
+df_inheritance <- fread("/file")
 
 
 
@@ -32991,10 +27165,10 @@ list_ar_genes <- ar_genes %>%
   trimws() # trim white spaces
 
 
-df_lof_variants <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/002_RareVariants_allscores_bygenes_20260414_no_HC.txt", select = c("Participant.ID", "Gene", "WES_500k_LoF_MAF01"))
+df_lof_variants <- fread("file"), select = c("Participant.ID", "Gene", "WES_500k_LoF_MAF01"))
 
 
-hauck_list <- read_xlsx("/home/stn/Documents/GitHub/Doc/analysis/genes_lists/IEI_Hauck_2024_FASLG.xlsx")
+hauck_list <- read_xlsx("file")
 
 
 
@@ -33253,460 +27427,6 @@ print(results, digits = 3)
 
 
 
-
-
-# _________ AoU replication ---------------------------------------------------------------
-### Estelle made this part
-
-
-required_packages <- c("data.table", 
-                       "dplyr", 
-                       "tidyr", 
-                       "stringr", 
-                       "readxl", 
-                       "broom",
-                       "lubridate",
-                       "survival",
-                       "ggsurvfit")
-
-for (pkg in required_packages) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, dependencies = TRUE)
-  }
-  library(pkg, character.only = TRUE)
-}
-
-
-
-
-
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
-  select(
-    # General data
-    person_id,
-    date_end_follow_up,
-    age_end_follow_up,
-    sex_genetic,
-    year_of_birth,
-    #    first_condition_date,
-    #    first_condition_year,
-    first_condition_age,
-    biosample_collection_age,
-    span_age_end_follow_up_age_inclusion,
-    Age.at.recruitment,
-    
-    # Diagnostics
-    TPI,
-    HAI,
-    SLE,
-    LLC,
-    LYMPHOME,
-    Other_LEUK,
-    CH_Age_sample,
-    
-    # Binaries 
-    binary_ITP_or_AIHA_indivs,
-    binary_AIHA,
-    binary_ITP,
-    binary_SLE,
-    binary_LLC,
-    binary_LYMPHOME,
-    binary_Other_LEUK,
-    binary_CH_Age_sample,
-    
-    # Lower age
-    AIHA_lower_age,
-    TPI_lower_age,
-    CAI_lower_age,
-    SLE_lower_age,
-    LYMPHOME_lower_age,
-    Other_LEUK_lower_age,
-    LLC_lower_age,
-    CH_Age_sample_lower_age,
-    
-    # Covariates
-    AoU_LoF_MAF01__Hauck_ITPnHAI,
-    PGS000196,
-    PGS004917,
-    PC1,
-    PC2,
-    PC3,
-    PC4,
-    PC5,
-    PC6,
-    PC7,
-    PC8,
-    PC9,
-    PC10
-  ) 
-
-# Rename IID col
-df <- df |> 
-  rename( `Participant.ID` = person_id)
-
-
-
-
-df_inheritance <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/IUIS_inheritance_curated_formatted.tsv")
-
-
-
-# Filter AR genes
-ar_genes <- df_inheritance %>% 
-  filter(Inheritance == "AR")
-
-# Create AR genes list
-list_ar_genes <- ar_genes %>% 
-  pull(gene_name) %>% 
-  strsplit(";") %>% 
-  unlist() %>% 
-  trimws() # trim white spaces
-
-
-df_lof_variants <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/002_RareVariants_allscores_bygenes_20260414_no_HC.txt", 
-                         select = c("Participant.ID", "Gene", "WES_500k_LoF_MAF01"))
-
-
-hauck_list <- read_xlsx("/home/rstudio/workspace/workspace-bucket/stennio/000_data/IEI_Hauck_2024_FASLG.xlsx")
-
-
-
-
-
-### Code
-
-# Create list of genes associated with Hauck (ITP OR AIHA) in df_lof_variants
-
-# Create new columns for further filtering
-df_genes_in_CAI <- df_lof_variants %>%
-  mutate(itp_associated = "no",
-         aiha_associated = "no" ) %>%
-  select(Gene, itp_associated, aiha_associated) %>%
-  distinct(Gene, .keep_all = T)
-
-
-
-hauck_ITP <- hauck_list %>%
-  filter(ITP != "") %>%
-  select(ITP) %>%
-  distinct(.) %>%
-  pull() %>%
-  strsplit(";\\s*") %>%
-  unlist() %>%
-  unique() %>%
-  trimws()
-
-
-
-hauck_AIHA <- hauck_list %>%
-  filter(AIHA != "") %>%
-  select(AIHA) %>%
-  pull() %>%
-  strsplit(";\\s*") %>%
-  unlist() %>%
-  unique() %>%
-  trimws()
-
-
-
-
-# Annotate genes associated with ITP
-df_genes_in_CAI <- df_genes_in_CAI %>%
-  mutate(
-    itp_associated = sapply(Gene, function(x) {
-      if(is.na(x) || x == "") return("no")
-      
-      # Divides cell content by ,; or -
-      genes <- unlist(strsplit(as.character(x), "[,;-]"))
-      genes <- trimws(genes)
-      genes <- genes[genes != ""]
-      
-      ifelse(any(genes %in% hauck_ITP), "yes", "no")
-    })
-  )
-
-
-# Annotate genes associated with AIHA
-df_genes_in_CAI <- df_genes_in_CAI %>%
-  mutate(
-    aiha_associated = sapply(Gene, function(x) {
-      if(is.na(x) || x == "") return("no")
-      
-      # Divides cell content by ,; or -
-      genes <- unlist(strsplit(as.character(x), "[,;-]"))
-      genes <- trimws(genes)
-      genes <- genes[genes != ""]
-      
-      ifelse(any(genes %in% hauck_AIHA), "yes", "no")
-    })
-  )
-
-
-# Filter only ITP or AIHA genes
-df_genes_in_CAI <- df_genes_in_CAI %>%
-  filter(itp_associated == "yes" | aiha_associated == "yes")
-
-
-# Annotate AR genes
-df_ar_genes <- df_genes_in_CAI %>% 
-  mutate(ar_gene = ifelse(Gene %in% list_ar_genes, "yes", "no"))
-
-
-# Create list of genes CAI AR in the df_lof_variants
-list_dataset_cai_ar_genes <- df_ar_genes %>%
-  filter(ar_gene == "yes") %>%
-  pull(Gene)
-
-
-
-### Check genes
-
-list_ar_genes
-length(list_ar_genes)
-
-
-# CAI AR in Hauck
-hauck_CAI_AR <- hauck_CAI[hauck_CAI %in% list_ar_genes]
-hauck_CAI_AR
-length(hauck_CAI_AR)
-
-
-# CAI AR in df_lof_variants
-list_dataset_cai_ar_genes
-length(list_dataset_cai_ar_genes)
-
-
-# Annotate number of variants LOF ITP AIHA AR in df_lof_variants
-df_indivs_genes_ar <- df_lof_variants %>% 
-  mutate(WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR = ifelse(Gene %in% list_dataset_cai_ar_genes, WES_500k_LoF_MAF01, "0")) %>% 
-  select(`Participant.ID`, WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR)
-
-
-# Annotate in the main table
-df_main_cai_ar_annotated <- left_join(df, df_indivs_genes_ar, by = c("Participant.ID")) %>% 
-  mutate(WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR = ifelse(is.na(WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR), 0, WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR))
-
-
-
-# Subset if needed
-df_subset <- df_main_cai_ar_annotated %>% 
-  mutate(WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR = as.numeric(WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR))
-nrow(df_subset)
-
-
-
-
-
-
-
-
-### CAI
-
-# Logistic regression
-summary(glm(
-  as.factor(binary_ITP_or_AIHA_indivs) ~  WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR +
-    sex_genetic +
-    age_end_follow_up  + 
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-
-model_logistic_regression <- glm(
-  as.factor(binary_ITP_or_AIHA_indivs) ~  WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR +
-    sex_genetic +
-    age_end_follow_up  + 
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-
-
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-
-
-
-
-
-### ITP
-
-# Logistic regression
-summary(glm(
-  as.factor(binary_ITP) ~  WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR +
-    sex_genetic +
-    age_end_follow_up  + 
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-
-model_logistic_regression <- glm(
-  as.factor(binary_ITP) ~  WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR +
-    sex_genetic +
-    age_end_follow_up  + 
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-
-
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-
-
-
-
-### AIHA
-
-# Logistic regression
-summary(glm(
-  as.factor(binary_AIHA) ~  WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR +
-    sex_genetic +
-    age_end_follow_up  + 
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-  
-)
-
-
-
-
-model_logistic_regression <- glm(
-  as.factor(binary_AIHA) ~  WES_500k_LoF_MAF01_Hauck_ITPnHAI_AR +
-    sex_genetic +
-    age_end_follow_up  + 
-    PC1 +
-    PC2 +
-    PC3 +
-    PC4 +
-    PC5 +
-    PC6 +
-    PC7 +
-    PC8 +
-    PC9 +
-    PC10, 
-  data=df_subset, family = binomial)
-
-
-
-
-results <- tidy(model_logistic_regression, conf.int = TRUE, conf.level = 0.95) %>%
-  mutate(
-    OR = exp(estimate),
-    CI_inf = exp(conf.low),
-    CI_sup = exp(conf.high)
-  ) %>%
-  select(term, OR, CI_inf, CI_sup, p.value, statistic)
-
-print(results, digits = 3)
-
-
-
-
-
-
-
-
-
-
-# List of AR and not AR genes in the dataset
-
-# 
-# yes_ar <- df_ar_genes %>% 
-#   filter(ar_gene == "yes")
-# 
-# list_yes_ar <- yes_ar %>% 
-#   pull(Gene)
-# 
-# list_yes_ar
-# 
-# 
-# 
-# 
-# not_ar <- df_ar_genes %>% 
-#   filter(ar_gene == "no")
-# 
-# list_not_ar <- not_ar %>%
-#   pull(Gene)
-# 
-# list_not_ar
-# 
-
-
-
-
 # ______ 6.2 AR genes in Hauck ----------------------------------------------------------------
 
 
@@ -33736,7 +27456,7 @@ for (pkg in required_packages) {
 
 ### Load data
 
-df_inheritance <- fread("/home/stn/Documents/GitHub/Doc/analysis/genes_lists/IUIS_inheritance_curated_formatted.tsv")
+df_inheritance <- fread("/file")
 
 
 
@@ -33754,7 +27474,7 @@ list_ar_genes <- ar_genes %>%
 
 
 
-hauck_list <- read_xlsx("/home/stn/Documents/GitHub/Doc/analysis/genes_lists/IEI_Hauck_2024_FASLG.xlsx")
+hauck_list <- read_xlsx("/file")
 
 
 
@@ -33863,7 +27583,7 @@ library(survival)
 
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -34246,7 +27966,7 @@ df_indivs_2_lof_CAI <- df_indivs_2_lof %>%
 
 # Indiv with 2 LoF
 
-df_lof_variants <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/002_RareVariants_allscores_bygenes_20260414_no_HC.txt", select = c("Participant.ID", "Gene", "WES_500k_LoF_MAF01"))
+df_lof_variants <- fread("file"), select = c("Participant.ID", "Gene", "WES_500k_LoF_MAF01"))
 
 indivs_2_lof <- df_lof_variants %>% 
   filter(Participant.ID == 1671995)
@@ -34302,7 +28022,7 @@ df_CAI_indivs_carrying_2_REVEL_0p5 <- df_CAI_indivs %>%
 # 
 # 
 # 
-# df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+# fread("file")  %>% 
 #   select(`Participant.ID`, 
 #          
 #          # Diagnostics
@@ -34415,7 +28135,7 @@ library(survival)
 
 
 
-df <- fread("/home/stn/Documents/GitHub/Doc/analysis/ukb_rare_variants/narval/trash/20260501_Summary_age_delays_diag_LOFnotHC_binaries_survival.txt")  %>% 
+fread("file")  %>% 
   select(`Participant.ID`, 
          
          # Diagnostics
@@ -34533,7 +28253,7 @@ sd_age_genetic_testing
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -34915,7 +28635,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
@@ -35022,7 +28742,7 @@ for (pkg in required_packages) {
 
 
 
-df <- fread("/home/rstudio/workspace/workspace-bucket/stennio/000_data/20260619_AoU_master_table.tsv") %>% 
+fread("file") %>% 
   select(
     # General data
     person_id,
